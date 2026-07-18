@@ -1,0 +1,43 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import EntryList from '../components/EntryList.astro';
+import { publicEntries, withBase } from '../lib/content';
+const entries = await publicEntries();
+const recent = entries.slice(0, 6);
+const meetings = entries.filter((entry) => entry.data.type === 'meeting').slice(0, 3);
+const projects = entries.filter((entry) => entry.data.type === 'project').slice(0, 3);
+const tracks = entries.filter((entry) => entry.data.type === 'track');
+---
+<BaseLayout>
+  <section class="research-desk content-shell">
+    <div class="desk-copy">
+      <p class="system-label">WEEKLY RESEARCH DESK / PUBLIC</p>
+      <h1>把正在发生的研究，整理成可以继续使用的知识。</h1>
+      <p>这里汇集区块链组公开的技术指导、例会记录、项目成果与成员信息。内容由成员通过统一文档维护，每次更新都保留来源和历史。</p>
+      <a class="primary-action" href={withBase('tracks/')}>浏览技术指导 <span aria-hidden="true">→</span></a>
+    </div>
+    <div class="desk-status" aria-label="知识库当前状态">
+      <div><span>公开内容</span><strong>{entries.length}</strong></div>
+      <div><span>技术方向</span><strong>{tracks.length}</strong></div>
+      <div><span>更新方式</span><strong class="text-value">PR 审核</strong></div>
+      <p>页面由已确认的 Markdown 确定性生成。</p>
+    </div>
+  </section>
+
+  <section class="content-shell section-block"><div class="section-heading"><h2>最近更新</h2><a href={withBase('search/')}>搜索全部</a></div><EntryList entries={recent} /></section>
+
+  <section class="content-shell map-section">
+    <div class="section-heading"><h2>技术地图</h2><a href={withBase('tracks/')}>查看方向</a></div>
+    {tracks.length ? <EntryList entries={tracks} /> : <div class="path-placeholder"><span>起点</span><i></i><strong>等待已确认的技术方向</strong><i></i><span>实践</span></div>}
+  </section>
+
+  <div class="content-shell split-sections">
+    <section><div class="section-heading"><h2>最新例会</h2><a href={withBase('meetings/')}>全部</a></div><EntryList entries={meetings} empty="例会模板已准备好，确认后的记录会出现在这里。" /></section>
+    <section><div class="section-heading"><h2>精选成果</h2><a href={withBase('projects/')}>全部</a></div><EntryList entries={projects} empty="项目成果经过确认和发布后会出现在这里。" /></section>
+  </div>
+
+  <section class="group-intro content-shell">
+    <picture><source media="(max-width: 640px)" srcset={withBase('generated/assets/site/group-photo-800.webp')} /><img src={withBase('generated/assets/site/group-photo-1600.webp')} alt="区块链组合影" width="1600" height="1067" loading="lazy" /></picture>
+    <div><p class="system-label">ABOUT THE GROUP</p><h2>记录不是终点，是下一次讨论的起点。</h2><p>知识库公开呈现小组的研究过程和可复用成果。真实内容来自成员提交并审核的文档，不由页面生成器推断。</p><a class="secondary-action" href={withBase('about/')}>了解小组与加入方式</a></div>
+  </section>
+</BaseLayout>

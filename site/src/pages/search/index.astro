@@ -1,0 +1,40 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+<BaseLayout title="搜索｜区块链组知识库">
+  <section class="search-page content-shell">
+    <p class="system-label">PAGEFIND / ON DEMAND</p><h1>搜索知识库</h1>
+    <label for="search-input">输入标题、摘要、作者或标签</label>
+    <div class="search-control"><input id="search-input" type="search" autocomplete="off" placeholder="例如：例会、实践、成员" /><button id="search-button" type="button">搜索</button></div>
+    <p id="search-status" class="search-status" aria-live="polite">搜索索引会在第一次搜索时加载。</p>
+    <ol id="search-results" class="entry-list search-results"></ol>
+  </section>
+  <script>
+    const input = document.querySelector<HTMLInputElement>('#search-input')!;
+    const button = document.querySelector<HTMLButtonElement>('#search-button')!;
+    const status = document.querySelector<HTMLParagraphElement>('#search-status')!;
+    const results = document.querySelector<HTMLOListElement>('#search-results')!;
+    let pagefind: any;
+    async function search() {
+      const query = input.value.trim();
+      if (!query) { status.textContent = '请输入搜索内容。'; input.focus(); return; }
+      status.textContent = '正在加载索引…';
+      try {
+        pagefind ??= await import(/* @vite-ignore */ `${import.meta.env.BASE_URL.replace(/\/$/, '')}/pagefind/pagefind.js`);
+        await pagefind.init();
+        const response = await pagefind.search(query);
+        const data = await Promise.all(response.results.slice(0, 20).map((item: any) => item.data()));
+        results.replaceChildren(...data.map((item: any) => {
+          const li = document.createElement('li'); const a = document.createElement('a'); a.href = item.url;
+          const main = document.createElement('span'); main.className = 'entry-main';
+          const strong = document.createElement('strong'); strong.textContent = item.meta.title;
+          const excerpt = document.createElement('span'); excerpt.textContent = item.excerpt.replace(/<[^>]+>/g, '');
+          main.append(strong, excerpt); a.append(main); li.append(a); return li;
+        }));
+        status.textContent = data.length ? `找到 ${data.length} 条结果。` : '没有匹配结果，请尝试更短的关键词。';
+      } catch { status.textContent = '搜索索引暂时不可用，请稍后重试。'; }
+    }
+    button.addEventListener('click', search);
+    input.addEventListener('keydown', (event) => { if (event.key === 'Enter') search(); });
+  </script>
+</BaseLayout>

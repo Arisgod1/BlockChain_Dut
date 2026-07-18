@@ -1,0 +1,16 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import redirects from '../../../generated/redirects.json';
+import tombstones from '../../../generated/tombstones.json';
+
+export function getStaticPaths() {
+  const redirectPaths = Object.entries(redirects).map(([from, to]) => ({ params: { legacy: from.replace(/^\//, '').replace(/\/$/, '') }, props: { kind: 'redirect', target: to } }));
+  const tombstonePaths = Object.entries(tombstones).filter(([from]) => !(from in redirects)).map(([from, item]) => ({ params: { legacy: from.replace(/^\//, '').replace(/\/$/, '') }, props: { kind: 'tombstone', item } }));
+  return [...redirectPaths, ...tombstonePaths];
+}
+const { kind, item } = Astro.props as { kind: 'redirect' | 'tombstone'; target?: string; item?: { id: string } };
+if (kind === 'redirect') return Astro.redirect(`${import.meta.env.BASE_URL.replace(/\/$/, '')}/${String(Astro.props.target).replace(/^\//, '')}`, 301);
+---
+<BaseLayout title="记录已移除｜区块链组知识库">
+  <section class="not-found content-shell"><p class="system-label">TOMBSTONE / REMOVED</p><h1>这条记录已从公开知识库移除。</h1><p>历史地址被永久保留，不会分配给其他内容。记录 ID：<code>{item?.id}</code></p><a class="primary-action" href={import.meta.env.BASE_URL}>返回首页</a></section>
+</BaseLayout>

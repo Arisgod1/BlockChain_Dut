@@ -1,0 +1,7 @@
+---
+const { title, description, code } = Astro.props;
+---
+<header class="page-intro content-shell">
+  <div><p class="system-label">{code}</p><h1>{title}</h1></div>
+  <p>{description}</p>
+</header>

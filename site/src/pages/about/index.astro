@@ -1,0 +1,18 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import EntryList from '../../components/EntryList.astro';
+import { publicEntries, withBase } from '../../lib/content';
+const entries = await publicEntries();
+const group = entries.filter((entry) => ['group', 'recruitment'].includes(entry.data.type));
+---
+<BaseLayout title="关于与加入｜区块链组知识库">
+  <section class="about-hero content-shell">
+    <div><p class="system-label">ABOUT / JOIN</p><h1>区块链组</h1><p>持续整理公开研究记录，让知识可以被找到、验证和继续使用。</p></div>
+    <img src={withBase('generated/assets/site/blockchain-group-sign.png')} alt="区块链组招牌" width="500" height="500" />
+  </section>
+  <section class="content-shell about-grid">
+    <div><h2>如何维护</h2><p>成员通过 Pull Request 提交统一格式的 Markdown。发布前会检查事实字段、内部链接、图片授权、页面构建和视觉回归。</p></div>
+    <div><h2>如何加入</h2><p>正式交流群和邮箱尚未写入公开配置。确认后会在这里提供唯一、清晰的联系入口。</p><img class="recruitment-mark" src={withBase('generated/assets/site/recruitment-mark.png')} alt="招新入口图标" width="120" height="120" /></div>
+  </section>
+  <section class="content-shell section-block"><div class="section-heading"><h2>公开说明</h2></div><EntryList entries={group} empty="加入信息确认后会通过正式文档发布。" /></section>
+</BaseLayout>

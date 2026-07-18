@@ -1,0 +1,5 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro'; import PageIntro from '../../components/PageIntro.astro'; import EntryList from '../../components/EntryList.astro'; import { publicEntries } from '../../lib/content';
+const entries=(await publicEntries()).filter(e=>e.data.type==='project');
+---
+<BaseLayout title="项目成果｜区块链组知识库"><PageIntro code="PROJECT OUTPUT" title="项目成果" description="记录项目背景、目标、状态、成果和可复现方式。" /><section class="content-shell section-block"><EntryList entries={entries} empty="尚无已发布的项目成果。" /></section></BaseLayout>
