@@ -20,7 +20,10 @@ jobs:
       - run: pnpm install --frozen-lockfile
       - run: pnpm site-maintainer check
       - run: pnpm site-maintainer rebuild --all
-      - run: git diff --exit-code
+      # update-report is a review artifact relative to the previous manifest.
+      # Deterministic site content, assets, manifest, redirects, and tombstones
+      # remain covered by this comparison.
+      - run: git diff --exit-code -- . ':(exclude)generated/update-report.md'
       - run: pnpm typecheck
       - run: pnpm test
       - run: pnpm exec playwright install --with-deps chromium
