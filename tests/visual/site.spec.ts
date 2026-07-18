@@ -47,6 +47,7 @@ test('member cards expose grade and detail affordance', async ({ page }) => {
   await expect(card).toBeVisible();
   await expect(card).toContainText('23 级');
   await expect(card).toContainText('GitHub · Arisgod1');
+  await page.getByRole('group', { name: '技术标签筛选' }).getByRole('button', { name: '全部', exact: true }).click();
   await page.getByRole('searchbox', { name: '成员搜索' }).fill('Flutter');
   await expect(page.locator('[data-filter-count]')).toContainText('1 项');
   await expect(page.getByRole('link', { name: '查看王明富的成员资料' })).toBeVisible();
