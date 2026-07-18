@@ -1,1 +1,22 @@
-{}
+{
+  "/meetings/site-publishing-drill/": {
+    "id": "site-publishing-drill",
+    "deletedAtCommit": "0c819cb6d060b1a4f4403969a6b2ff14865a0410",
+    "previousUrl": "/meetings/site-publishing-drill/"
+  },
+  "/members/demo-maintainer/": {
+    "id": "demo-maintainer",
+    "deletedAtCommit": "0c819cb6d060b1a4f4403969a6b2ff14865a0410",
+    "previousUrl": "/members/demo-maintainer/"
+  },
+  "/projects/sustainable-publishing-pipeline/": {
+    "id": "sustainable-publishing-pipeline",
+    "deletedAtCommit": "0c819cb6d060b1a4f4403969a6b2ff14865a0410",
+    "previousUrl": "/projects/sustainable-publishing-pipeline/"
+  },
+  "/tracks/research-record-method/": {
+    "id": "research-record-method",
+    "deletedAtCommit": "0c819cb6d060b1a4f4403969a6b2ff14865a0410",
+    "previousUrl": "/tracks/research-record-method/"
+  }
+}

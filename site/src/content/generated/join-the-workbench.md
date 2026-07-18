@@ -6,9 +6,9 @@ summary: 用于验证“组内动态”页面的 mock 信息，说明可以参�
 type: recruitment
 status: published
 authors:
-  - demo-maintainer
+  - tang-mingdi
 tags:
-  - 部署演练
+  - 加入小组
   - 加入
 contactEmail: arisone@foxmail.com
 qqGroupNumber: "1103782491"

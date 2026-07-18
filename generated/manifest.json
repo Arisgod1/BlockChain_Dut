@@ -1,20 +1,110 @@
 {
   "schemaVersion": 1,
   "generatorVersion": "1.0.0",
-  "processedSourceCommit": "b9ddcc278524bbc25df328c80cbb04ff80f6b5af",
+  "processedSourceCommit": "0c819cb6d060b1a4f4403969a6b2ff14865a0410",
   "siteBuildContractVersion": 1,
   "entries": [
+    {
+      "id": "bao-yunye",
+      "type": "member",
+      "status": "published",
+      "sourcePath": "knowledge/members/bao-yunye.md",
+      "sourceBlobSha": "dda843b30ee1192339c3739d062c0be70ed499b7",
+      "sourceCommit": "0c819cb6d060b1a4f4403969a6b2ff14865a0410",
+      "sourcePr": null,
+      "generatedPath": "site/src/content/generated/bao-yunye.md",
+      "publicUrl": "/members/bao-yunye/",
+      "contentHash": "2d47f319428eb5c55c5c51f354481796bf298e95aa6b1f2df0ceaf3033a1a750",
+      "assetHashes": [
+        "4ca484b77285f20b3176244a2468b871a891fe2c2b629e02d4a94601970d5993"
+      ],
+      "deleted": false
+    },
+    {
+      "id": "blockchain-dut-knowledge-base",
+      "type": "project",
+      "status": "published",
+      "sourcePath": "knowledge/projects/blockchain-dut-knowledge-base.md",
+      "sourceBlobSha": "d6fb13ea6afa88a78ca1f4bba679d4aba1988a60",
+      "sourceCommit": "0c819cb6d060b1a4f4403969a6b2ff14865a0410",
+      "sourcePr": null,
+      "generatedPath": "site/src/content/generated/blockchain-dut-knowledge-base.md",
+      "publicUrl": "/projects/blockchain-dut-knowledge-base/",
+      "contentHash": "91d29651c880bd3b706710bcd3c6cfc267d412260255dd9de677c30535e8a1db",
+      "assetHashes": [],
+      "deleted": false
+    },
+    {
+      "id": "cai-ruihan",
+      "type": "member",
+      "status": "published",
+      "sourcePath": "knowledge/members/cai-ruihan.md",
+      "sourceBlobSha": "73e18253207da3200e7e789767a9ab32f3dcb199",
+      "sourceCommit": "0c819cb6d060b1a4f4403969a6b2ff14865a0410",
+      "sourcePr": null,
+      "generatedPath": "site/src/content/generated/cai-ruihan.md",
+      "publicUrl": "/members/cai-ruihan/",
+      "contentHash": "9392465e082351f2c8d4d2ba14f571745c5a2275ac36908cab6e26c4b4ec12b0",
+      "assetHashes": [
+        "c87bc4c766f4955009424d5b20aeff345625321f2336b0bc6013a640509b9fa5"
+      ],
+      "deleted": false
+    },
     {
       "id": "demo-maintainer",
       "type": "member",
       "status": "published",
       "sourcePath": "knowledge/members/demo-maintainer.md",
       "sourceBlobSha": "cfd75d418cc4c27858d407d94efadac67deffb6b",
-      "sourceCommit": "b9ddcc278524bbc25df328c80cbb04ff80f6b5af",
+      "sourceCommit": "0c819cb6d060b1a4f4403969a6b2ff14865a0410",
       "sourcePr": null,
       "generatedPath": "site/src/content/generated/demo-maintainer.md",
       "publicUrl": "/members/demo-maintainer/",
       "contentHash": "084282d8ccbcdac22a2b7f5ead534371c67bd76cf35296c054829a0a368f97fd",
+      "assetHashes": [],
+      "deleted": true
+    },
+    {
+      "id": "deng-yiming",
+      "type": "member",
+      "status": "published",
+      "sourcePath": "knowledge/members/deng-yiming.md",
+      "sourceBlobSha": "488761c5cda1264445bf780fee795a8328e991e7",
+      "sourceCommit": "0c819cb6d060b1a4f4403969a6b2ff14865a0410",
+      "sourcePr": null,
+      "generatedPath": "site/src/content/generated/deng-yiming.md",
+      "publicUrl": "/members/deng-yiming/",
+      "contentHash": "f5911bb82ee443c1cef806d37024400f64bdbf52d82f1661bd88d79b056324fb",
+      "assetHashes": [
+        "0286b609bfa6bd73ad254e7539d39cb2e09099a4c6a5b1d4eb7e22ab30981b7b"
+      ],
+      "deleted": false
+    },
+    {
+      "id": "git-version-control-meeting",
+      "type": "meeting",
+      "status": "published",
+      "sourcePath": "knowledge/meetings/2025-10-12-git-version-control.md",
+      "sourceBlobSha": "92a65b2ecffb1568d524a78ea3a34ed6f59769ba",
+      "sourceCommit": "0c819cb6d060b1a4f4403969a6b2ff14865a0410",
+      "sourcePr": null,
+      "generatedPath": "site/src/content/generated/git-version-control-meeting.md",
+      "publicUrl": "/meetings/git-version-control-meeting/",
+      "contentHash": "af6db100cd96ddff9f3f8140e7d9e3394465e547830dcef6a589874942498cfc",
+      "assetHashes": [],
+      "deleted": false
+    },
+    {
+      "id": "go-getting-started",
+      "type": "track",
+      "status": "published",
+      "sourcePath": "knowledge/tracks/go-getting-started.md",
+      "sourceBlobSha": "fc8278cfca9faa2f4ef23df47b97feb0334f7247",
+      "sourceCommit": "0c819cb6d060b1a4f4403969a6b2ff14865a0410",
+      "sourcePr": null,
+      "generatedPath": "site/src/content/generated/go-getting-started.md",
+      "publicUrl": "/tracks/go-getting-started/",
+      "contentHash": "3ed1f23b41f3d56a43b731c19cbfcf634929f54c0eb7be6c8b0bba0543d30b17",
       "assetHashes": [],
       "deleted": false
     },
@@ -23,14 +113,62 @@
       "type": "recruitment",
       "status": "published",
       "sourcePath": "knowledge/recruitment/join-the-workbench.md",
-      "sourceBlobSha": "08a9370b43096a96bfbde188f33c96e93924560e",
-      "sourceCommit": "b9ddcc278524bbc25df328c80cbb04ff80f6b5af",
+      "sourceBlobSha": "2cdbd70ba642480d9a5137b543c9d319c6140e8e",
+      "sourceCommit": "0c819cb6d060b1a4f4403969a6b2ff14865a0410",
       "sourcePr": null,
       "generatedPath": "site/src/content/generated/join-the-workbench.md",
       "publicUrl": "/recruitment/join-the-workbench/",
-      "contentHash": "755d6dad2ff3d83799e1ada3b038fca08c9b9f90f5c4fd79dbe3035140335838",
+      "contentHash": "68d63898e98b4d85d3057252d3f13e1470459d3081d1484dcd6f70a7c62a0292",
       "assetHashes": [
-        "8c6d73c08c2fd2a1217d062723c2ef81e7cc89a365d576a96e290671d7be5acf"
+        "bddbd3c73fcc189bc5463f50ae743ae4167a9e13cef66fb18bcfc109c977a9f9"
+      ],
+      "deleted": false
+    },
+    {
+      "id": "liu-jingwen",
+      "type": "member",
+      "status": "published",
+      "sourcePath": "knowledge/members/liu-jingwen.md",
+      "sourceBlobSha": "fdffa91a0b6d4a9b592e9521b905701f25235e33",
+      "sourceCommit": "0c819cb6d060b1a4f4403969a6b2ff14865a0410",
+      "sourcePr": null,
+      "generatedPath": "site/src/content/generated/liu-jingwen.md",
+      "publicUrl": "/members/liu-jingwen/",
+      "contentHash": "815b3e9a9b9e3153d6c8703330372efb86f4b45a7df87d9c07b7d93388a072d7",
+      "assetHashes": [
+        "1d9a4925e238043811fdbbb5cca74f898ad3059ee4568c549feb4e27c8ad57ec"
+      ],
+      "deleted": false
+    },
+    {
+      "id": "ma-xinrui",
+      "type": "member",
+      "status": "published",
+      "sourcePath": "knowledge/members/ma-xinrui.md",
+      "sourceBlobSha": "f8a1c62ed90d691b75ca7368d23dc366eeac251c",
+      "sourceCommit": "0c819cb6d060b1a4f4403969a6b2ff14865a0410",
+      "sourcePr": null,
+      "generatedPath": "site/src/content/generated/ma-xinrui.md",
+      "publicUrl": "/members/ma-xinrui/",
+      "contentHash": "67a7b54594e18a36b0da034290e5344aee4fafbeea0e90ce72676a6cea44dbfb",
+      "assetHashes": [
+        "9c002396461a7c78dafd4a0da0869bb0ee843dbfa690f4096cfa7190bc4f1d3e"
+      ],
+      "deleted": false
+    },
+    {
+      "id": "ma-yuhao",
+      "type": "member",
+      "status": "published",
+      "sourcePath": "knowledge/members/ma-yuhao.md",
+      "sourceBlobSha": "89ed59f3c364856f3e6bbb717dd6616a11f05768",
+      "sourceCommit": "0c819cb6d060b1a4f4403969a6b2ff14865a0410",
+      "sourcePr": null,
+      "generatedPath": "site/src/content/generated/ma-yuhao.md",
+      "publicUrl": "/members/ma-yuhao/",
+      "contentHash": "09284ff95bc59cef8a8da834c226de1fc0bf28f17caf231765adfe8b07830bdf",
+      "assetHashes": [
+        "ee2fa7480e522deb0302e1e4b31b01cac75d1f778e380dbddb9261378dedf219"
       ],
       "deleted": false
     },
@@ -39,13 +177,29 @@
       "type": "group",
       "status": "published",
       "sourcePath": "knowledge/group/public-knowledge-workbench.md",
-      "sourceBlobSha": "952869f02868ff2f4dd5ea766600b0cfb76b2792",
-      "sourceCommit": "b9ddcc278524bbc25df328c80cbb04ff80f6b5af",
+      "sourceBlobSha": "ea943890a7ec55bdac2405768259499a3ad4c32b",
+      "sourceCommit": "0c819cb6d060b1a4f4403969a6b2ff14865a0410",
       "sourcePr": null,
       "generatedPath": "site/src/content/generated/public-knowledge-workbench.md",
       "publicUrl": "/group/public-knowledge-workbench/",
-      "contentHash": "3b5f479ee176cf0fa235c38591b0bd162b92afbc8c7180938b66ef3af4aeeefc",
+      "contentHash": "062a55bf6fa33cf1f9968aab4f6e7587569a80ef8ccaeeacb7c3e3e459bbc32f",
       "assetHashes": [],
+      "deleted": false
+    },
+    {
+      "id": "ren-chengda",
+      "type": "member",
+      "status": "published",
+      "sourcePath": "knowledge/members/ren-chengda.md",
+      "sourceBlobSha": "62d1aae6db1e134411323eefd602f88db766286b",
+      "sourceCommit": "0c819cb6d060b1a4f4403969a6b2ff14865a0410",
+      "sourcePr": null,
+      "generatedPath": "site/src/content/generated/ren-chengda.md",
+      "publicUrl": "/members/ren-chengda/",
+      "contentHash": "fe973f425d19ac09bb0d410478576182edf1241001d6adf8456592b930781fad",
+      "assetHashes": [
+        "f4fdc2cf9c9b3ec4087b911e30e53a13f4ea8f8f59f539da3ecf24c3e35bd32c"
+      ],
       "deleted": false
     },
     {
@@ -54,12 +208,28 @@
       "status": "published",
       "sourcePath": "knowledge/tracks/research-record-method.md",
       "sourceBlobSha": "b41790ae52aeb13605ab6c6606a3b320903f87ee",
-      "sourceCommit": "b9ddcc278524bbc25df328c80cbb04ff80f6b5af",
+      "sourceCommit": "0c819cb6d060b1a4f4403969a6b2ff14865a0410",
       "sourcePr": null,
       "generatedPath": "site/src/content/generated/research-record-method.md",
       "publicUrl": "/tracks/research-record-method/",
       "contentHash": "f217290ff0904c787286699bd27b1ba631d9e3a64350cc189e1bb42ffedb2875",
       "assetHashes": [],
+      "deleted": true
+    },
+    {
+      "id": "si-chenfei",
+      "type": "member",
+      "status": "published",
+      "sourcePath": "knowledge/members/si-chenfei.md",
+      "sourceBlobSha": "33907c3c1d548141057817bebf69b55587c2a3e8",
+      "sourceCommit": "0c819cb6d060b1a4f4403969a6b2ff14865a0410",
+      "sourcePr": null,
+      "generatedPath": "site/src/content/generated/si-chenfei.md",
+      "publicUrl": "/members/si-chenfei/",
+      "contentHash": "843ec74da12899daa23422c28b34898a389d5e9a989dc3a564a87c6a2df1a660",
+      "assetHashes": [
+        "1d12ada9d928c59d3e244c4251501ffb4180b89ce6b571ae8dcd32db1eb4949f"
+      ],
       "deleted": false
     },
     {
@@ -68,12 +238,28 @@
       "status": "published",
       "sourcePath": "knowledge/meetings/2026-07-18-site-publishing-drill.md",
       "sourceBlobSha": "d0a23cb3800891a275098df878c9ae66d64f7dd1",
-      "sourceCommit": "b9ddcc278524bbc25df328c80cbb04ff80f6b5af",
+      "sourceCommit": "0c819cb6d060b1a4f4403969a6b2ff14865a0410",
       "sourcePr": null,
       "generatedPath": "site/src/content/generated/site-publishing-drill.md",
       "publicUrl": "/meetings/site-publishing-drill/",
       "contentHash": "40a5f1a54f050e1797bfb5ea3713a261dbd16493785ec1373fa154f569253019",
       "assetHashes": [],
+      "deleted": true
+    },
+    {
+      "id": "sun-changxiang",
+      "type": "member",
+      "status": "published",
+      "sourcePath": "knowledge/members/sun-changxiang.md",
+      "sourceBlobSha": "0f4a17ef1a7cfabf90e93cb059f616cae53f041e",
+      "sourceCommit": "0c819cb6d060b1a4f4403969a6b2ff14865a0410",
+      "sourcePr": null,
+      "generatedPath": "site/src/content/generated/sun-changxiang.md",
+      "publicUrl": "/members/sun-changxiang/",
+      "contentHash": "7e442ff9be407642a8495d7501fcb8312b317cb20cc83e899f27ae10f18231b9",
+      "assetHashes": [
+        "ea5745f4e55bbcd422ae436efbf392d358b6df980e4b307e3011af96ae423cbe"
+      ],
       "deleted": false
     },
     {
@@ -82,15 +268,132 @@
       "status": "published",
       "sourcePath": "knowledge/projects/sustainable-publishing-pipeline.md",
       "sourceBlobSha": "cae1e356a65b2f03ea877f27c0c24bc4920977dd",
-      "sourceCommit": "b9ddcc278524bbc25df328c80cbb04ff80f6b5af",
+      "sourceCommit": "0c819cb6d060b1a4f4403969a6b2ff14865a0410",
       "sourcePr": null,
       "generatedPath": "site/src/content/generated/sustainable-publishing-pipeline.md",
       "publicUrl": "/projects/sustainable-publishing-pipeline/",
       "contentHash": "428667ca461fcc56b450b85e1eb060f1bde661bbaae5e02c18c2e7a864314f59",
       "assetHashes": [],
+      "deleted": true
+    },
+    {
+      "id": "tang-mingdi",
+      "type": "member",
+      "status": "published",
+      "sourcePath": "knowledge/members/tang-mingdi.md",
+      "sourceBlobSha": "a414a7115b5d95a1fabaa7b636a5459fc0db3fd2",
+      "sourceCommit": "0c819cb6d060b1a4f4403969a6b2ff14865a0410",
+      "sourcePr": null,
+      "generatedPath": "site/src/content/generated/tang-mingdi.md",
+      "publicUrl": "/members/tang-mingdi/",
+      "contentHash": "724f3689da3a11f61bf454e92a4fab8daaf2c43841bbfbf65574354477549a2c",
+      "assetHashes": [
+        "bc28b6a2a32525b3283c7687e1ba5271697ce5e3b32e654fc0f6cc832df5e199"
+      ],
+      "deleted": false
+    },
+    {
+      "id": "wang-mingfu",
+      "type": "member",
+      "status": "published",
+      "sourcePath": "knowledge/members/wang-mingfu.md",
+      "sourceBlobSha": "5b2c37433a82dd630bfc01ca319ab3b279e28744",
+      "sourceCommit": "0c819cb6d060b1a4f4403969a6b2ff14865a0410",
+      "sourcePr": null,
+      "generatedPath": "site/src/content/generated/wang-mingfu.md",
+      "publicUrl": "/members/wang-mingfu/",
+      "contentHash": "fc0bd95cc5472c309a9474460cd93d951442e64da0bb48c70ea7e69d73f489f7",
+      "assetHashes": [
+        "05fe6db8e85d95fd8e90e02464f1f39b68fdc3de7cc0cf1619d424fe34e56571"
+      ],
+      "deleted": false
+    },
+    {
+      "id": "wang-yida",
+      "type": "member",
+      "status": "published",
+      "sourcePath": "knowledge/members/wang-yida.md",
+      "sourceBlobSha": "7392403f112952b157cda550698568206e314bc3",
+      "sourceCommit": "0c819cb6d060b1a4f4403969a6b2ff14865a0410",
+      "sourcePr": null,
+      "generatedPath": "site/src/content/generated/wang-yida.md",
+      "publicUrl": "/members/wang-yida/",
+      "contentHash": "29d7e558f05b1d908f27d70541a619418d232f3294829f0a633ba63d9d8421f4",
+      "assetHashes": [
+        "53504bfde8891983945efc984a754c492df94233cb7895c0803a2ac4c597e2e5"
+      ],
+      "deleted": false
+    },
+    {
+      "id": "zhang-honghao",
+      "type": "member",
+      "status": "published",
+      "sourcePath": "knowledge/members/zhang-honghao.md",
+      "sourceBlobSha": "2ce2802e252b7ad9c49e12e0dca8582ccfae103b",
+      "sourceCommit": "0c819cb6d060b1a4f4403969a6b2ff14865a0410",
+      "sourcePr": null,
+      "generatedPath": "site/src/content/generated/zhang-honghao.md",
+      "publicUrl": "/members/zhang-honghao/",
+      "contentHash": "4ef1163aac752113a46f28f944e1ac8bba4d53d51c6fbb29ca85dcb6a5908103",
+      "assetHashes": [
+        "a1b3c8afd7f365b4c7c1261a1063f2c2eeba1aa22519ef147ad7c458aac9235f"
+      ],
+      "deleted": false
+    },
+    {
+      "id": "zhao-shuyang",
+      "type": "member",
+      "status": "published",
+      "sourcePath": "knowledge/members/zhao-shuyang.md",
+      "sourceBlobSha": "b4ddc2125c119798384b5f7d9be4e9fd42554b3f",
+      "sourceCommit": "0c819cb6d060b1a4f4403969a6b2ff14865a0410",
+      "sourcePr": null,
+      "generatedPath": "site/src/content/generated/zhao-shuyang.md",
+      "publicUrl": "/members/zhao-shuyang/",
+      "contentHash": "aed77aee089c646408644c7cbeb9aedc88f64ba87f156a80b9208944e779ab78",
+      "assetHashes": [
+        "a71203b8849de694c2101644992c1dd9f4b2962c5a320b5452cb322f5e0ca669"
+      ],
+      "deleted": false
+    },
+    {
+      "id": "zhen-cheng",
+      "type": "member",
+      "status": "published",
+      "sourcePath": "knowledge/members/zhen-cheng.md",
+      "sourceBlobSha": "6c85e655e608489d9c90426a87ec8639ef632c2a",
+      "sourceCommit": "0c819cb6d060b1a4f4403969a6b2ff14865a0410",
+      "sourcePr": null,
+      "generatedPath": "site/src/content/generated/zhen-cheng.md",
+      "publicUrl": "/members/zhen-cheng/",
+      "contentHash": "d6806a3cc28f4f62e6cf3e599b388900cdb76f70e6762dea87e476a42b50e7ce",
+      "assetHashes": [
+        "5a0926e75028a6e8304108838d8b5a3bebc02a4113c0297806945981ea6070c1"
+      ],
       "deleted": false
     }
   ],
   "redirects": {},
-  "tombstones": {}
+  "tombstones": {
+    "/meetings/site-publishing-drill/": {
+      "id": "site-publishing-drill",
+      "deletedAtCommit": "0c819cb6d060b1a4f4403969a6b2ff14865a0410",
+      "previousUrl": "/meetings/site-publishing-drill/"
+    },
+    "/members/demo-maintainer/": {
+      "id": "demo-maintainer",
+      "deletedAtCommit": "0c819cb6d060b1a4f4403969a6b2ff14865a0410",
+      "previousUrl": "/members/demo-maintainer/"
+    },
+    "/projects/sustainable-publishing-pipeline/": {
+      "id": "sustainable-publishing-pipeline",
+      "deletedAtCommit": "0c819cb6d060b1a4f4403969a6b2ff14865a0410",
+      "previousUrl": "/projects/sustainable-publishing-pipeline/"
+    },
+    "/tracks/research-record-method/": {
+      "id": "research-record-method",
+      "deletedAtCommit": "0c819cb6d060b1a4f4403969a6b2ff14865a0410",
+      "previousUrl": "/tracks/research-record-method/"
+    }
+  }
 }
