@@ -8,7 +8,7 @@ status: published
 authors: [tang-mingdi]
 speakers: [tang-mingdi]
 tags: [例会, Git, 版本控制, 编程技巧]
-heldAt: 2025-10-12T19:00:00+08:00
+heldAt: 2025-10-12T18:00:00+08:00
 updatedAt: 2026-07-18
 cover: null
 media: []
@@ -22,6 +22,9 @@ references:
 ## 内容
 
 本次例会介绍了 Git 的工作区、暂存区和版本库，并演示常用操作：
+
+- 地点：教学区 B102
+- 时间：2025 年 10 月 12 日 18:00–19:00
 
 ```bash
 git add filename
