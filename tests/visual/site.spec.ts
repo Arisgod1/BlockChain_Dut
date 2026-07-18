@@ -64,6 +64,24 @@ test('search has an accessible loading state', async ({ page }) => {
   await expect(page.locator('#search-status')).toContainText('请输入');
 });
 
+test('public contact details and QR code are available', async ({ page }) => {
+  await page.goto('./about/');
+  await expect(page.getByText('QQ群：1103782491')).toBeVisible();
+  await expect(page.getByRole('link', { name: 'arisone@foxmail.com' })).toHaveAttribute('href', 'mailto:arisone@foxmail.com');
+  const qr = page.getByRole('img', { name: 'QQ群 1103782491 的加入二维码' });
+  await expect(qr).toBeVisible();
+  expect(await qr.evaluate((image: HTMLImageElement) => image.naturalWidth)).toBeGreaterThan(0);
+});
+
+test('mobile menu exposes animated state without hiding navigation semantics', async ({ page, isMobile }) => {
+  test.skip(!isMobile);
+  await page.goto('./');
+  const menu = page.getByRole('button', { name: '菜单' });
+  await menu.click();
+  await expect(menu).toHaveAttribute('aria-expanded', 'true');
+  await expect(page.getByRole('navigation', { name: '主要导航' })).toHaveClass(/is-open/);
+});
+
 test('404 contract', async ({ page }) => {
   await page.goto('./404.html');
   await expect(page.getByRole('heading', { level: 1 })).toContainText('不在当前知识库');

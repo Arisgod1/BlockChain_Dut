@@ -30,7 +30,8 @@ export async function checkAll() {
       const ownedInline = new RegExp(`^/assets/inline/${assetDirByType[item.data.type]}/${item.data.id}/\\d{2}-[a-z0-9]+(?:-[a-z0-9]+)*\\.(?:jpg|jpeg|png|webp|avif)$`).test(media.path);
       const sharedEvent = /^\/assets\/events\/\d{4}\/[a-z0-9]+(?:-[a-z0-9]+)*\/\d{2}-[a-z0-9]+(?:-[a-z0-9]+)*\.(?:jpg|jpeg|png|webp|avif)$/.test(media.path);
       const ownAvatar = item.data.type === 'member' && new RegExp(`^/assets/avatars/${item.data.id}/avatar\\.(?:jpg|jpeg|png|webp|avif)$`).test(media.path);
-      if (!ownedInline && !sharedEvent && !ownAvatar) errors.push(`${item.sourcePath}: media path must belong to the entry, its member avatar, or a shared event`);
+      const recruitmentContact = item.data.type === 'recruitment' && /^\/assets\/site\/contact\/[a-z0-9]+(?:-[a-z0-9]+)*\.(?:jpg|jpeg|png|webp|avif)$/.test(media.path);
+      if (!ownedInline && !sharedEvent && !ownAvatar && !recruitmentContact) errors.push(`${item.sourcePath}: media path must belong to the entry, its member avatar, a recruitment contact asset, or a shared event`);
       if (!media.alt.trim()) errors.push(`${item.sourcePath}: non-decorative media requires alt text (${media.path})`);
       if (imageNames.has(media.path)) continue;
       imageNames.add(media.path);
@@ -39,7 +40,7 @@ export async function checkAll() {
     }
   }
   const assetPaths = await fg('knowledge/assets/**/*.{jpg,jpeg,png,webp,avif}', { cwd: root });
-  const assetPattern = /^knowledge\/assets\/(?:site\/(?:brand|photos)\/[a-z0-9]+(?:-[a-z0-9]+)*|covers\/(?:group|tracks|meetings|projects|members|recruitment)\/[a-z0-9]+(?:-[a-z0-9]+)*\/cover|inline\/(?:group|tracks|meetings|projects|members|recruitment)\/[a-z0-9]+(?:-[a-z0-9]+)*\/\d{2}-[a-z0-9]+(?:-[a-z0-9]+)*|avatars\/[a-z0-9]+(?:-[a-z0-9]+)*\/avatar|events\/\d{4}\/[a-z0-9]+(?:-[a-z0-9]+)*\/\d{2}-[a-z0-9]+(?:-[a-z0-9]+)*)\.(?:jpg|jpeg|png|webp|avif)$/;
+  const assetPattern = /^knowledge\/assets\/(?:site\/(?:brand|photos|contact)\/[a-z0-9]+(?:-[a-z0-9]+)*|covers\/(?:group|tracks|meetings|projects|members|recruitment)\/[a-z0-9]+(?:-[a-z0-9]+)*\/cover|inline\/(?:group|tracks|meetings|projects|members|recruitment)\/[a-z0-9]+(?:-[a-z0-9]+)*\/\d{2}-[a-z0-9]+(?:-[a-z0-9]+)*|avatars\/[a-z0-9]+(?:-[a-z0-9]+)*\/avatar|events\/\d{4}\/[a-z0-9]+(?:-[a-z0-9]+)*\/\d{2}-[a-z0-9]+(?:-[a-z0-9]+)*)\.(?:jpg|jpeg|png|webp|avif)$/;
   for (const relativePath of assetPaths.sort()) {
     const name = relativePath.split('/').at(-1) ?? '';
     if (!/^[a-z0-9]+(?:-[a-z0-9]+)*\.(?:jpg|jpeg|png|webp|avif)$/.test(name)) errors.push(`${relativePath}: invalid filename`);

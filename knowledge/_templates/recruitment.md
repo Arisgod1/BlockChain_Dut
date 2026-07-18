@@ -9,6 +9,8 @@ authors:
   - member-public-id
 tags:
   - 加入
+contactEmail: public-email@example.com
+qqGroupNumber: "0000000000"
 publishedAt: 2026-07-17
 updatedAt: 2026-07-17
 cover: null
@@ -22,6 +24,6 @@ references: []
 
 ## 加入方式
 
-<!-- 交流群和邮箱从品牌配置读取。 -->
+<!-- 只填写已确认可以公开的邮箱和群号；二维码登记在 media。 -->
 
 ## 常见问题

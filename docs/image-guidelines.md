@@ -7,6 +7,9 @@
 ```text
 knowledge/assets/
 ├── site/
+│   ├── brand/
+│   ├── photos/
+│   └── contact/
 │   ├── brand/                         Logo、招牌、加入图标
 │   └── photos/                        首页合影等少量长期全站照片
 ├── covers/
@@ -17,7 +20,7 @@ knowledge/assets/
 └── events/<yyyy>/<event-id>/NN-subject.ext
 ```
 
-- `site/`：仅放跨全站长期使用的少量素材，不能当普通图片仓库。
+- `site/`：仅放跨全站长期使用的少量素材；`brand/` 放品牌标识，`photos/` 放站点级合影，`contact/` 放公开群二维码或联系卡片，不能当普通图片仓库。
 - `covers/`：一份内容一个 ID 目录，主封面固定命名为 `cover.ext`。
 - `inline/`：正文专用图片，目录必须与引用文档的类型和 ID 对应。
 - `avatars/`：一个成员一个目录，只放本人确认公开的头像。
@@ -36,6 +39,7 @@ knowledge/assets/
 | 项目架构图 | `inline/projects/<entry-id>/NN-subject.png` | `inline/projects/sustainable-publishing-pipeline/01-architecture.png` |
 | 成员头像 | `avatars/<member-id>/avatar.jpg` | `avatars/member-public-id/avatar.jpg` |
 | 多篇文档共用的活动照片 | `events/<yyyy>/<event-id>/NN-subject.jpg` | `events/2026/summer-workshop/01-group-photo.jpg` |
+| 公开联系二维码 | `site/contact/<channel>-qr.png` | `site/contact/qq-group-qr.png` |
 
 判断顺序：只被一篇内容使用就放该内容的 `covers/` 或 `inline/`；确实被多篇内容复用才放 `events/`；只有全站长期使用才放 `site/`。
 

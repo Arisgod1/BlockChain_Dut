@@ -4,6 +4,10 @@ import EntryList from '../../components/EntryList.astro';
 import { publicEntries, withBase } from '../../lib/content';
 const entries = await publicEntries();
 const group = entries.filter((entry) => ['group', 'recruitment'].includes(entry.data.type));
+const recruitment = entries.find((entry) => entry.data.type === 'recruitment');
+const qqQr = recruitment?.data.type === 'recruitment'
+  ? recruitment.data.media.find((item) => item.path === '/assets/site/contact/qq-group-qr.png')
+  : undefined;
 ---
 <BaseLayout title="组内动态｜区块链组知识库">
   <section class="about-hero content-shell">
@@ -13,7 +17,21 @@ const group = entries.filter((entry) => ['group', 'recruitment'].includes(entry.
   <section class="content-shell about-grid">
     <div><h2>网站维护方式</h2><p>成员通过 Pull Request 提交统一格式的文档和图片。</p>
     <p>采用skil统一发布</p></div>
-    <div><h2>如何加入</h2><p>正式交流群和邮箱尚未写入公开配置。确认后会在这里提供唯一、清晰的联系入口。</p><img class="recruitment-mark" src={withBase('generated/assets/site/recruitment-mark.png')} alt="招新入口图标" width="120" height="120" /></div>
+    <div>
+      <h2>如何加入</h2>
+      {recruitment?.data.type === 'recruitment' && qqQr ? (
+        <div class="join-contact">
+          <figure>
+            <img class="qq-group-qr" src={withBase(`generated${qqQr.path}`)} alt={qqQr.alt} width="1060" height="1060" />
+            <figcaption>QQ群：{recruitment.data.qqGroupNumber}</figcaption>
+          </figure>
+          <div class="contact-details">
+            <p>扫码申请加入交流群，或通过邮箱联系我们。</p>
+            <a href={`mailto:${recruitment.data.contactEmail}`}>{recruitment.data.contactEmail}</a>
+          </div>
+        </div>
+      ) : <p>公开联系方式将在确认后通过正式文档发布。</p>}
+    </div>
   </section>
   <section class="content-shell collection-panel"><div class="section-heading"><h2>动态与公开说明</h2></div><EntryList entries={group} empty="加入信息确认后会通过正式文档发布。" /></section>
 </BaseLayout>

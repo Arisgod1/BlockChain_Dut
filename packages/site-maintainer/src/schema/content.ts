@@ -49,7 +49,7 @@ export const contentSchema = z.discriminatedUnion('type', [
   publishable.extend({ type: z.literal('track') }),
   publishable.extend({ type: z.literal('project') }),
   publishable.extend({ type: z.literal('member'), grade: z.string().regex(/^\d{2}$/), contacts: z.array(contactSchema).max(6) }),
-  publishable.extend({ type: z.literal('recruitment') }),
+  publishable.extend({ type: z.literal('recruitment'), contactEmail: z.string().email(), qqGroupNumber: z.string().regex(/^\d{5,14}$/) }),
 ]);
 
 export type ContentFrontmatter = z.infer<typeof contentSchema>;

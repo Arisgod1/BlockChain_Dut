@@ -10,10 +10,17 @@ authors:
 tags:
   - 部署演练
   - 加入
+contactEmail: arisone@foxmail.com
+qqGroupNumber: "1103782491"
 publishedAt: 2026-07-18
 updatedAt: 2026-07-18
 cover: null
-media: []
+media:
+  - path: /assets/site/contact/qq-group-qr.png
+    alt: QQ群 1103782491 的加入二维码
+    caption: 扫码申请加入区块链组QQ群。
+    source: 区块链组QQ群名片
+    rights: owned
 references: []
 ---
 
@@ -30,7 +37,8 @@ references: []
 
 ## 加入方式
 
-正式交流群和邮箱尚未写入公开配置。本 mock 文档不会提供虚构入口。
+- QQ群：`1103782491`，可使用页面二维码申请加入。
+- 邮箱：`arisone@foxmail.com`。
 
 ## 常见问题
 

@@ -183,6 +183,7 @@ pnpm site-maintainer publish
 | 正文截图、图表和照片 | `knowledge/assets/inline/<type>/<entry-id>/NN-subject.ext` |
 | 经本人授权的成员头像 | `knowledge/assets/avatars/<member-id>/avatar.ext` |
 | 多篇内容共用的活动精选图 | `knowledge/assets/events/<yyyy>/<event-id>/NN-subject.ext` |
+| 全站公开联系方式图片 | `knowledge/assets/site/contact/<channel>-qr.ext` |
 
 文件名只能使用小写英文、数字和连字符。每张正文图片都要在文档的 `media` 中登记路径、alt、来源和版权状态。
 
