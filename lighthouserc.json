@@ -1,8 +1,9 @@
 {
   "ci": {
     "collect": {
-      "staticDistDir": "./site/dist",
-      "url": ["http://localhost/BlockChain_Dut/", "http://localhost/BlockChain_Dut/search/"],
+      "startServerCommand": "pnpm preview --host 127.0.0.1 --port 4321",
+      "startServerReadyPattern": "Local",
+      "url": ["http://127.0.0.1:4321/BlockChain_Dut/", "http://127.0.0.1:4321/BlockChain_Dut/search/"],
       "numberOfRuns": 1
     },
     "assert": {
