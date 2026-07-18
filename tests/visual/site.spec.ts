@@ -71,6 +71,15 @@ test('public contact details and QR code are available', async ({ page }) => {
   const qr = page.getByRole('img', { name: 'QQ群 1103782491 的加入二维码' });
   await expect(qr).toBeVisible();
   expect(await qr.evaluate((image: HTMLImageElement) => image.naturalWidth)).toBeGreaterThan(0);
+  const box = await qr.boundingBox();
+  expect(box).not.toBeNull();
+  expect(Math.abs(box!.width - box!.height)).toBeLessThan(2);
+});
+
+test('real project exposes repository creation time', async ({ page }) => {
+  await page.goto('./projects/blockchain-dut-knowledge-base/');
+  await expect(page.getByRole('heading', { level: 1, name: '区块链组知识库' })).toBeVisible();
+  await expect(page.getByText(/创建于.*2026年7月17日/)).toBeVisible();
 });
 
 test('collapsed menu exposes animated state without hiding navigation semantics', async ({ page }) => {
