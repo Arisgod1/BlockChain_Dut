@@ -36,7 +36,7 @@ test('member cards expose grade and detail affordance', async ({ page }) => {
   const card = page.getByRole('link', { name: '查看唐明迪的成员资料' });
   await expect(card).toBeVisible();
   await expect(card).toContainText('23 级');
-  await expect(card).toContainText('联系方式暂未公开');
+  await expect(card).toContainText('GitHub · Arisgod1');
 });
 
 test('related references expose type and source', async ({ page }) => {
