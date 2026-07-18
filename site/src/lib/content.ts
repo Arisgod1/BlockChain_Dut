@@ -32,5 +32,5 @@ export function dateText(date: Date) {
 }
 
 export function publicDate(entry: KnowledgeEntry) {
-  return entry.data.type === 'meeting' ? entry.data.heldAt : entry.data.publishedAt;
+  return entry.data.type === 'meeting' ? entry.data.heldAt : entry.data.type === 'project' ? entry.data.createdAt : entry.data.publishedAt;
 }

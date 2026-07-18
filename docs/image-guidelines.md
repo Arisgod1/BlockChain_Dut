@@ -34,9 +34,9 @@ knowledge/assets/
 | --- | --- | --- |
 | 全站 Logo、招牌 | `site/brand/` | `site/brand/blockchain-group-sign.png` |
 | 首页长期合影源图 | `site/photos/` | `site/photos/group-photo-original.jpg` |
-| 技术指导封面 | `covers/tracks/<entry-id>/cover.jpg` | `covers/tracks/research-record-method/cover.jpg` |
-| 例会正文截图 | `inline/meetings/<entry-id>/NN-subject.png` | `inline/meetings/site-publishing-drill/01-build-result.png` |
-| 项目架构图 | `inline/projects/<entry-id>/NN-subject.png` | `inline/projects/sustainable-publishing-pipeline/01-architecture.png` |
+| 技术指导封面 | `covers/tracks/<entry-id>/cover.jpg` | `covers/tracks/go-getting-started/cover.jpg` |
+| 例会正文截图 | `inline/meetings/<entry-id>/NN-subject.png` | `inline/meetings/git-version-control-meeting/01-command-demo.png` |
+| 项目架构图 | `inline/projects/<entry-id>/NN-subject.png` | `inline/projects/blockchain-dut-knowledge-base/01-architecture.png` |
 | 成员头像 | `avatars/<member-id>/avatar.jpg` | `avatars/member-public-id/avatar.jpg` |
 | 多篇文档共用的活动照片 | `events/<yyyy>/<event-id>/NN-subject.jpg` | `events/2026/summer-workshop/01-group-photo.jpg` |
 | 公开联系二维码 | `site/contact/<channel>-qr.png` | `site/contact/qq-group-qr.png` |
@@ -72,14 +72,14 @@ knowledge/assets/
 封面通过 `cover` 登记：
 
 ```yaml
-cover: /assets/covers/tracks/research-record-method/cover.jpg
+cover: /assets/covers/tracks/go-getting-started/cover.jpg
 ```
 
 正文图片必须在 `media` 中逐张登记：
 
 ```yaml
 media:
-  - path: /assets/inline/meetings/site-publishing-drill/01-build-result.png
+  - path: /assets/inline/meetings/git-version-control-meeting/01-command-demo.png
     alt: 构建结果页面显示全部检查通过
     caption: 本次发布演练的构建结果。
     source: 区块链组

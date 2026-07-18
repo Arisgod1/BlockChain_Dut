@@ -9,7 +9,8 @@ authors:
   - member-public-id
 tags:
   - replace-me
-publishedAt: 2026-07-17
+# 项目首次创建的准确日期或带时区时间；不要用知识库发布日期代替。
+createdAt: 2026-07-17T21:00:00+08:00
 updatedAt: 2026-07-17
 cover: null
 media: []

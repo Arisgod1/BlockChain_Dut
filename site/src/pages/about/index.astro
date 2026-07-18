@@ -22,7 +22,7 @@ const qqQr = recruitment?.data.type === 'recruitment'
       {recruitment?.data.type === 'recruitment' && qqQr ? (
         <div class="join-contact">
           <figure>
-            <img class="qq-group-qr" src={withBase(`generated${qqQr.path}`)} alt={qqQr.alt} width="1060" height="1060" />
+            <img class="qq-group-qr" src={withBase(`generated${qqQr.path}`)} alt={qqQr.alt} width="1000" height="1000" />
             <figcaption>QQ群：{recruitment.data.qqGroupNumber}</figcaption>
           </figure>
           <div class="contact-details">

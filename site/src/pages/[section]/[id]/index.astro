@@ -16,7 +16,7 @@ const referenceHref = (url: string) => url.startsWith('/') ? withBase(url) : url
 <BaseLayout title={`${entry.data.title}｜区块链组知识库`} description={entry.data.summary}>
   <article class="article-shell" data-pagefind-body>
     <header class="article-header">
-      <div class="article-meta"><span>{labels[entry.data.type]}</span><time datetime={publicDate(entry).toISOString()}>{entry.data.type === 'meeting' ? '例会时间' : '发布于'} {dateText(publicDate(entry))}</time><span>更新于 {dateText(entry.data.updatedAt)}</span>{entry.data.status === 'archived' && <span class="status archived">已归档</span>}</div>
+      <div class="article-meta"><span>{labels[entry.data.type]}</span><time datetime={publicDate(entry).toISOString()}>{entry.data.type === 'meeting' ? '例会时间' : entry.data.type === 'project' ? '创建于' : '发布于'} {dateText(publicDate(entry))}</time><span>更新于 {dateText(entry.data.updatedAt)}</span>{entry.data.status === 'archived' && <span class="status archived">已归档</span>}</div>
       <h1 data-pagefind-meta="title">{entry.data.title}</h1><p>{entry.data.summary}</p>
       <div class="tag-row">{entry.data.tags.map((tag) => <span>{tag}</span>)}</div>
       {entry.data.type === 'meeting' && <div class="detail-links"><strong>主讲人</strong>{entry.data.speakers.map((id) => memberById.get(id)).filter(Boolean).map((member) => <a href={entryPath(member!)}>{member!.data.title}</a>)}</div>}

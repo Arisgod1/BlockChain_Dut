@@ -20,7 +20,7 @@ export async function checkAll() {
   const imageNames = new Set<string>();
   for (const item of items) {
     for (const pattern of sensitivePatterns) if (pattern.test(item.raw)) errors.push(`${item.sourcePath}: possible sensitive information`);
-    const publicDate = item.data.type === 'meeting' ? item.data.heldAt : item.data.publishedAt;
+    const publicDate = item.data.type === 'meeting' ? item.data.heldAt : item.data.type === 'project' ? item.data.createdAt : item.data.publishedAt;
     if (item.data.updatedAt.toISOString().slice(0, 10) < publicDate.toISOString().slice(0, 10)) errors.push(`${item.sourcePath}: updatedAt precedes public date`);
     for (const reference of item.data.references) {
       if (reference.url.startsWith('/') && !publicUrls.has(reference.url)) errors.push(`${item.sourcePath}: reference target does not exist (${reference.url})`);

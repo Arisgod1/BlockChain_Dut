@@ -9,6 +9,7 @@ const { entries } = Astro.props as { entries: KnowledgeEntry[] };
       <a class="member-card" href={entryPath(entry)} aria-label={`查看${entry.data.title}的成员资料`}>
         <span class="member-card-inner">
           <span class="member-card-face member-card-front">
+            {entry.data.media[0] && <img class="member-avatar" src={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/generated${entry.data.media[0].path}`} alt="" width="600" height="600" />}
             <span class="member-role">{entry.data.tags.find((tag) => ['组长', '老师', '成员'].includes(tag)) ?? '成员'}</span>
             <strong>{entry.data.title}</strong>
             <span class="member-grade">{entry.data.grade} 级</span>

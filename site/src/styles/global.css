@@ -51,3 +51,4 @@ button,input { font: inherit; }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior:auto; } *,*::before,*::after { animation-duration:.01ms !important; transition-duration:.01ms !important; }.member-card:hover .member-card-inner,.member-card:focus-visible .member-card-inner { transform:none; }.member-card-back { display:none; } }
 .member-grid { grid-template-columns:repeat(auto-fill,minmax(14rem,18rem)); }
 @media (max-width: 800px) { .group-intro picture { max-height:none; } }
+.member-avatar { width:4.5rem; height:4.5rem; margin:.75rem 0 .5rem; border:1px solid var(--line); border-radius:50%; background:var(--surface); object-fit:cover; }

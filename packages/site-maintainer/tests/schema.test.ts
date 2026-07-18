@@ -12,6 +12,11 @@ describe('content schema', () => {
     expect(contentSchema.parse({ ...meetingBase, type: 'meeting', speakers: ['member-example'], heldAt: '2026-07-17' }).type).toBe('meeting');
   });
   it('rejects the removed meeting publishedAt field', () => expect(() => contentSchema.parse({ ...base, type: 'meeting', speakers: ['member-example'], heldAt: '2026-07-17' })).toThrow());
+  it('requires project createdAt and rejects project publishedAt', () => {
+    expect(() => contentSchema.parse({ ...base, type: 'project' })).toThrow();
+    const { publishedAt: _oldField, ...projectBase } = base;
+    expect(contentSchema.parse({ ...projectBase, type: 'project', createdAt: '2026-07-17T21:00:29+08:00' }).type).toBe('project');
+  });
   it('requires member grade and contacts', () => expect(() => contentSchema.parse({ ...base, type: 'member' })).toThrow());
   it('requires a type and source for every reference', () => expect(() => contentSchema.parse({ ...base, references: [{ title: '资料', url: '/example/' }] })).toThrow());
 });
