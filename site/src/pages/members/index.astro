@@ -1,0 +1,5 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro'; import PageIntro from '../../components/PageIntro.astro'; import EntryList from '../../components/EntryList.astro'; import { publicEntries } from '../../lib/content';
+const entries=(await publicEntries()).filter(e=>e.data.type==='member');
+---
+<BaseLayout title="成员｜区块链组知识库"><PageIntro code="PUBLIC MEMBERS" title="成员" description="这里只展示成员本人确认公开的介绍、参与方向和成果。" /><section class="content-shell section-block"><EntryList entries={entries} empty="尚无成员公开资料。" /></section></BaseLayout>

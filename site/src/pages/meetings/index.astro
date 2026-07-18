@@ -1,0 +1,5 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro'; import PageIntro from '../../components/PageIntro.astro'; import EntryList from '../../components/EntryList.astro'; import { publicEntries } from '../../lib/content';
+const entries=(await publicEntries()).filter(e=>e.data.type==='meeting');
+---
+<BaseLayout title="例会｜区块链组知识库"><PageIntro code="MEETING LOG" title="例会" description="保留议题、结论、行动项和相关资料，让讨论可以继续追踪。" /><section class="content-shell section-block"><EntryList entries={entries} empty="尚无已发布的例会记录。" /></section></BaseLayout>

@@ -1,0 +1,55 @@
+---
+import '../styles/global.css';
+const { title = '区块链组知识库', description = '区块链组公开知识库与研究记录。' } = Astro.props;
+const base = import.meta.env.BASE_URL;
+const current = Astro.url.pathname;
+const navigation = [
+  ['首页', ''], ['技术指导', 'tracks/'], ['例会', 'meetings/'], ['成员', 'members/'], ['关于与加入', 'about/'],
+];
+const href = (path: string) => `${base.replace(/\/$/, '')}/${path.replace(/^\//, '')}`;
+---
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#edf2ef" />
+    <link rel="icon" href={href('generated/assets/site/recruitment-mark.png')} />
+    <title>{title}</title>
+  </head>
+  <body>
+    <a class="skip-link" href="#content">跳到正文</a>
+    <header class="site-header">
+      <div class="header-inner">
+        <a class="brand" href={href('')} aria-label="区块链组知识库首页">
+          <img src={href('generated/assets/site/blockchain-group-sign.png')} alt="" width="42" height="42" />
+          <span><strong>区块链组</strong><small>KNOWLEDGE SYSTEM</small></span>
+        </a>
+        <button class="menu-button" type="button" aria-expanded="false" aria-controls="primary-nav">菜单</button>
+        <nav id="primary-nav" class="primary-nav" aria-label="主要导航">
+          {navigation.map(([label, path]) => {
+            const url = href(path);
+            const active = path === '' ? current === base || current === `${base}/` : current.startsWith(url);
+            return <a href={url} aria-current={active ? 'page' : undefined}>{label}</a>;
+          })}
+          <a class="search-link" href={href('search/')}>搜索 <span aria-hidden="true">⌕</span></a>
+        </nav>
+      </div>
+    </header>
+    <main id="content" data-pagefind-body><slot /></main>
+    <footer class="site-footer">
+      <div><strong>区块链组知识库</strong><p>公开、可追溯、持续维护的研究记录。</p></div>
+      <a href={href('about/')}>关于与加入</a>
+    </footer>
+    <script>
+      const button = document.querySelector('.menu-button');
+      const nav = document.querySelector('#primary-nav');
+      button?.addEventListener('click', () => {
+        const open = button.getAttribute('aria-expanded') === 'true';
+        button.setAttribute('aria-expanded', String(!open));
+        nav?.classList.toggle('is-open', !open);
+      });
+    </script>
+  </body>
+</html>

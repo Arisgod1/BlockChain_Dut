@@ -1,0 +1,22 @@
+---
+import type { KnowledgeEntry } from '../lib/content';
+import { dateText, entryPath, labels } from '../lib/content';
+const { entries, empty = '目前还没有已发布内容。' } = Astro.props as { entries: KnowledgeEntry[]; empty?: string };
+---
+{entries.length ? (
+  <ol class="entry-list">
+    {entries.map((entry) => (
+      <li>
+        <a href={entryPath(entry)}>
+          <span class="entry-main"><strong>{entry.data.title}</strong><span>{entry.data.summary}</span></span>
+          <span class="entry-meta">
+            <span>{labels[entry.data.type]}</span><time datetime={entry.data.updatedAt.toISOString()}>{dateText(entry.data.updatedAt)}</time>
+            {entry.data.status === 'archived' && <span class="status archived">已归档</span>}
+          </span>
+        </a>
+      </li>
+    ))}
+  </ol>
+) : (
+  <div class="empty-state"><strong>等待第一份公开记录</strong><p>{empty}</p><span>草稿和格式示例不会出现在这里。</span></div>
+)}

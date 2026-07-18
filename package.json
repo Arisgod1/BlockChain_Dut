@@ -1,0 +1,21 @@
+{
+  "name": "blockchain-dut-knowledge-base",
+  "private": true,
+  "packageManager": "pnpm@11.9.0",
+  "scripts": {
+    "build": "pnpm --filter @blockchain-dut/site build",
+    "dev": "pnpm --filter @blockchain-dut/site dev",
+    "preview": "pnpm --filter @blockchain-dut/site preview",
+    "typecheck": "pnpm -r typecheck",
+    "test": "pnpm --filter @blockchain-dut/site-maintainer test",
+    "test:e2e": "playwright test",
+    "test:budgets": "node scripts/check-budgets.mjs",
+    "site-maintainer": "pnpm --filter @blockchain-dut/site-maintainer cli",
+    "validate": "pnpm site-maintainer check && pnpm typecheck && pnpm test && pnpm build && pnpm test:budgets"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "^4.10.2",
+    "@playwright/test": "^1.54.1",
+    "playwright": "^1.54.1"
+  }
+}
