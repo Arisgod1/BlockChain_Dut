@@ -8,6 +8,7 @@ status: published
 authors: [cai-ruihan]
 tags: [成员, Python, Go, FastAPI, 后端]
 grade: "24"
+avatarUrl: https://github.com/MrCarfield.png
 contacts:
   - label: GitHub
     value: MrCarfield
@@ -15,11 +16,7 @@ contacts:
 publishedAt: 2026-07-18
 updatedAt: 2026-07-18
 cover: null
-media:
-  - path: /assets/avatars/cai-ruihan/avatar.png
-    alt: 蔡瑞含的公开头像
-    source: 原区块链组网站公开成员资料
-    rights: permission-granted
+media: []
 references: []
 ---
 
@@ -31,4 +28,3 @@ references: []
 
 - Python、Go
 - FastAPI 与后端开发
-

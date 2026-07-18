@@ -8,6 +8,7 @@ status: published
 authors: [liu-jingwen]
 tags: [成员, 深度学习, AI, Node.js, 数据库]
 grade: "23"
+avatarUrl: https://github.com/ywlbywl.png
 contacts:
   - label: GitHub
     value: ywlbywl
@@ -15,11 +16,7 @@ contacts:
 publishedAt: 2026-07-18
 updatedAt: 2026-07-18
 cover: null
-media:
-  - path: /assets/avatars/liu-jingwen/avatar.png
-    alt: 刘静雯的公开头像
-    source: 原区块链组网站公开成员资料
-    rights: permission-granted
+media: []
 references: []
 ---
 
@@ -31,4 +28,3 @@ references: []
 
 - 深度学习
 - Node.js、MySQL、PostgreSQL
-

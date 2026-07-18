@@ -1,10 +1,10 @@
 # Site update report
 
-Source commit: `8ba11802b32d7390950000ab98f0ee47f7182db1`
+Source commit: `766584ecfd58bc286c77ff08b25ec6aaaaad6845`
 Generator: `1.0.0`
 
-- Added: ai-workflow-building, backend-frameworks-meeting, backend-fundamentals-meeting, cloud-native-containers-meeting, coder-skills-meeting, deep-learning-introduction, frontend-frameworks-meeting, frontend-fundamentals-meeting, full-stack-web-deployment, llm-frontiers, neural-network-building, orm-database-operations-meeting, rag-system-development
-- Changed: git-version-control-meeting
+- Added: none
+- Changed: bao-yunye, cai-ruihan, deng-yiming, liu-jingwen, ma-xinrui, ma-yuhao, ren-chengda, si-chenfei, sun-changxiang, tang-mingdi, wang-mingfu, wang-yida, zhang-honghao, zhao-shuyang, zhen-cheng
 - Deleted: none
 
 Run `pnpm site-maintainer preview` and inspect all affected routes before publishing.

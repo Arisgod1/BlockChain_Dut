@@ -8,6 +8,7 @@ status: published
 authors: [ma-yuhao]
 tags: [成员, Go, 后端]
 grade: "24"
+avatarUrl: https://github.com/yinxiangpingfan.png
 contacts:
   - label: GitHub
     value: yinxiangpingfan
@@ -15,11 +16,7 @@ contacts:
 publishedAt: 2026-07-18
 updatedAt: 2026-07-18
 cover: null
-media:
-  - path: /assets/avatars/ma-yuhao/avatar.png
-    alt: 马玉灏的公开头像
-    source: 原区块链组网站公开成员资料
-    rights: permission-granted
+media: []
 references: []
 ---
 
@@ -30,4 +27,3 @@ references: []
 ## 参与方向
 
 - Go 语言
-

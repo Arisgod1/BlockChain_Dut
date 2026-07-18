@@ -8,6 +8,7 @@ status: published
 authors: [zhen-cheng]
 tags: [成员, 机器学习, 深度学习]
 grade: "23"
+avatarUrl: https://github.com/Hi-Zachary.png
 contacts:
   - label: GitHub
     value: Hi-Zachary
@@ -15,11 +16,7 @@ contacts:
 publishedAt: 2026-07-18
 updatedAt: 2026-07-18
 cover: null
-media:
-  - path: /assets/avatars/zhen-cheng/avatar.png
-    alt: 甄诚的公开头像
-    source: 原区块链组网站公开成员资料
-    rights: permission-granted
+media: []
 references: []
 ---
 
@@ -31,4 +28,3 @@ references: []
 
 - 机器学习
 - 深度学习
-

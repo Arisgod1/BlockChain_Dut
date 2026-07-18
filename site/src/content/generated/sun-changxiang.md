@@ -8,6 +8,7 @@ status: published
 authors: [sun-changxiang]
 tags: [成员, Android, 前端, 多媒体, 设计]
 grade: "24"
+avatarUrl: https://github.com/CHANCE719.png
 contacts:
   - label: GitHub
     value: CHANCE719
@@ -15,11 +16,7 @@ contacts:
 publishedAt: 2026-07-18
 updatedAt: 2026-07-18
 cover: null
-media:
-  - path: /assets/avatars/sun-changxiang/avatar.png
-    alt: 孙常翔的公开头像
-    source: 原区块链组网站公开成员资料
-    rights: permission-granted
+media: []
 references: []
 ---
 
@@ -31,4 +28,3 @@ references: []
 
 - Android 与前端开发
 - 多媒体制作与平面设计
-

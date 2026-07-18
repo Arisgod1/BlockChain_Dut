@@ -8,6 +8,7 @@ status: published
 authors: [ren-chengda]
 tags: [成员, Java, Python, 后端, 深度学习]
 grade: "24"
+avatarUrl: https://github.com/enderrcd.png
 contacts:
   - label: GitHub
     value: enderrcd
@@ -15,11 +16,7 @@ contacts:
 publishedAt: 2026-07-18
 updatedAt: 2026-07-18
 cover: null
-media:
-  - path: /assets/avatars/ren-chengda/avatar.png
-    alt: 任诚达的公开头像
-    source: 原区块链组网站公开成员资料
-    rights: permission-granted
+media: []
 references: []
 ---
 
@@ -32,4 +29,3 @@ references: []
 - Java Spring Boot
 - Python Web
 - 深度学习
-

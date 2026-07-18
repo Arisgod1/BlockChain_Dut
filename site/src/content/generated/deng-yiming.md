@@ -8,6 +8,7 @@ status: published
 authors: [deng-yiming]
 tags: [成员, 深度学习, 遥感, 图像分割, 深度图]
 grade: "23"
+avatarUrl: https://github.com/dymgithub.png
 contacts:
   - label: GitHub
     value: dymgithub
@@ -15,11 +16,7 @@ contacts:
 publishedAt: 2026-07-18
 updatedAt: 2026-07-18
 cover: null
-media:
-  - path: /assets/avatars/deng-yiming/avatar.png
-    alt: 邓亦明的公开头像
-    source: 原区块链组网站公开成员资料
-    rights: permission-granted
+media: []
 references: []
 ---
 
@@ -32,4 +29,3 @@ references: []
 - 深度学习
 - 遥感图像语义分割
 - 深度图
-
