@@ -69,11 +69,22 @@ jobs:
       - name: Record successful production deployment
         env:
           SHA: ${{ steps.candidate.outputs.sha }}
+          DEPLOY_KEY: ${{ secrets.PRODUCTION_DEPLOY_KEY }}
         run: |
+          install -d -m 700 "$HOME/.ssh"
+          printf '%s\n' "$DEPLOY_KEY" > "$HOME/.ssh/id_ed25519"
+          chmod 600 "$HOME/.ssh/id_ed25519"
+          printf '%s\n' 'github.com ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOMqqnkVzrm0SdG6UOoqKLsabgH5C9okWi0dh2l9GKJl' > "$HOME/.ssh/known_hosts"
+          git remote set-url origin "git@github.com:${GITHUB_REPOSITORY}.git"
           TAG="deploy-$(date -u +%Y%m%d)-${SHA:0:7}"
           if git ls-remote --exit-code --tags origin "refs/tags/$TAG" >/dev/null 2>&1; then
-            echo "Deployment tag already exists: $TAG" >&2
-            exit 1
+            TAG_SHA=$(git ls-remote origin "refs/tags/$TAG^{}" | cut -f1)
+            if [ "$TAG_SHA" != "$SHA" ]; then
+              echo "Deployment tag $TAG already points to another commit" >&2
+              exit 1
+            fi
+            git push origin "$SHA:refs/heads/production"
+            exit 0
           fi
           git config user.name github-actions[bot]
           git config user.email 41898282+github-actions[bot]@users.noreply.github.com
