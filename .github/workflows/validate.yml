@@ -38,7 +38,7 @@ jobs:
       - if: steps.policy.outputs.full_validation == 'true'
         run: pnpm exec playwright install --with-deps chromium
       - if: steps.policy.outputs.full_validation == 'true'
-        run: pnpm test:e2e --project=mobile --project=desktop
+        run: pnpm test:e2e
       - if: steps.policy.outputs.full_validation == 'true'
         run: pnpm build
       - if: steps.policy.outputs.full_validation == 'true'
