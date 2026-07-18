@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "generatorVersion": "1.0.0",
-  "processedSourceCommit": "cf31183752f3add5282cda4a6a43854fdd728883",
+  "processedSourceCommit": "b9ddcc278524bbc25df328c80cbb04ff80f6b5af",
   "siteBuildContractVersion": 1,
   "entries": [
     {
@@ -10,7 +10,7 @@
       "status": "published",
       "sourcePath": "knowledge/members/demo-maintainer.md",
       "sourceBlobSha": "cfd75d418cc4c27858d407d94efadac67deffb6b",
-      "sourceCommit": "cf31183752f3add5282cda4a6a43854fdd728883",
+      "sourceCommit": "b9ddcc278524bbc25df328c80cbb04ff80f6b5af",
       "sourcePr": null,
       "generatedPath": "site/src/content/generated/demo-maintainer.md",
       "publicUrl": "/members/demo-maintainer/",
@@ -23,13 +23,15 @@
       "type": "recruitment",
       "status": "published",
       "sourcePath": "knowledge/recruitment/join-the-workbench.md",
-      "sourceBlobSha": "c06c53e5be1a61d9dba5332e929d402255406041",
-      "sourceCommit": "cf31183752f3add5282cda4a6a43854fdd728883",
+      "sourceBlobSha": "08a9370b43096a96bfbde188f33c96e93924560e",
+      "sourceCommit": "b9ddcc278524bbc25df328c80cbb04ff80f6b5af",
       "sourcePr": null,
       "generatedPath": "site/src/content/generated/join-the-workbench.md",
       "publicUrl": "/recruitment/join-the-workbench/",
-      "contentHash": "dab1428419b2c6b85afa4a03a4722e13cec707678f8d2048a0eb821e6dc92ea6",
-      "assetHashes": [],
+      "contentHash": "755d6dad2ff3d83799e1ada3b038fca08c9b9f90f5c4fd79dbe3035140335838",
+      "assetHashes": [
+        "8c6d73c08c2fd2a1217d062723c2ef81e7cc89a365d576a96e290671d7be5acf"
+      ],
       "deleted": false
     },
     {
@@ -38,7 +40,7 @@
       "status": "published",
       "sourcePath": "knowledge/group/public-knowledge-workbench.md",
       "sourceBlobSha": "952869f02868ff2f4dd5ea766600b0cfb76b2792",
-      "sourceCommit": "cf31183752f3add5282cda4a6a43854fdd728883",
+      "sourceCommit": "b9ddcc278524bbc25df328c80cbb04ff80f6b5af",
       "sourcePr": null,
       "generatedPath": "site/src/content/generated/public-knowledge-workbench.md",
       "publicUrl": "/group/public-knowledge-workbench/",
@@ -52,7 +54,7 @@
       "status": "published",
       "sourcePath": "knowledge/tracks/research-record-method.md",
       "sourceBlobSha": "b41790ae52aeb13605ab6c6606a3b320903f87ee",
-      "sourceCommit": "cf31183752f3add5282cda4a6a43854fdd728883",
+      "sourceCommit": "b9ddcc278524bbc25df328c80cbb04ff80f6b5af",
       "sourcePr": null,
       "generatedPath": "site/src/content/generated/research-record-method.md",
       "publicUrl": "/tracks/research-record-method/",
@@ -66,7 +68,7 @@
       "status": "published",
       "sourcePath": "knowledge/meetings/2026-07-18-site-publishing-drill.md",
       "sourceBlobSha": "d0a23cb3800891a275098df878c9ae66d64f7dd1",
-      "sourceCommit": "cf31183752f3add5282cda4a6a43854fdd728883",
+      "sourceCommit": "b9ddcc278524bbc25df328c80cbb04ff80f6b5af",
       "sourcePr": null,
       "generatedPath": "site/src/content/generated/site-publishing-drill.md",
       "publicUrl": "/meetings/site-publishing-drill/",
@@ -80,7 +82,7 @@
       "status": "published",
       "sourcePath": "knowledge/projects/sustainable-publishing-pipeline.md",
       "sourceBlobSha": "cae1e356a65b2f03ea877f27c0c24bc4920977dd",
-      "sourceCommit": "cf31183752f3add5282cda4a6a43854fdd728883",
+      "sourceCommit": "b9ddcc278524bbc25df328c80cbb04ff80f6b5af",
       "sourcePr": null,
       "generatedPath": "site/src/content/generated/sustainable-publishing-pipeline.md",
       "publicUrl": "/projects/sustainable-publishing-pipeline/",
