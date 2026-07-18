@@ -8,7 +8,7 @@ status: published
 authors: [cai-ruihan]
 tags: [成员, Python, Go, FastAPI, 后端]
 grade: "24"
-avatarUrl: https://github.com/MrCarfield.png
+avatarUrl: https://avatars.githubusercontent.com/MrCarfield?size=192
 contacts:
   - label: GitHub
     value: MrCarfield

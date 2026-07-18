@@ -36,7 +36,7 @@ knowledge/assets/
 | 技术指导封面 | `covers/tracks/<entry-id>/cover.jpg` | `covers/tracks/go-getting-started/cover.jpg` |
 | 例会正文截图 | `inline/meetings/<entry-id>/NN-subject.png` | `inline/meetings/git-version-control-meeting/01-command-demo.png` |
 | 项目架构图 | `inline/projects/<entry-id>/NN-subject.png` | `inline/projects/blockchain-dut-knowledge-base/01-architecture.png` |
-| 成员头像 | 不保存静态图片 | `avatarUrl: https://github.com/public-account.png` |
+| 成员头像 | 不保存静态图片 | `avatarUrl: https://avatars.githubusercontent.com/public-account?size=192` |
 | 多篇文档共用的活动照片 | `events/<yyyy>/<event-id>/NN-subject.jpg` | `events/2026/summer-workshop/01-group-photo.jpg` |
 | 公开联系二维码 | `site/contact/<channel>-qr.png` | `site/contact/qq-group-qr.png` |
 

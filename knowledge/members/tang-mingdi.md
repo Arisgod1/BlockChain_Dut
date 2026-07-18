@@ -8,7 +8,7 @@ status: published
 authors: [tang-mingdi]
 tags: [组长, 后端, Go, Agent]
 grade: "23"
-avatarUrl: https://github.com/Arisgod1.png
+avatarUrl: https://avatars.githubusercontent.com/Arisgod1?size=192
 contacts:
   - label: GitHub
     value: Arisgod1

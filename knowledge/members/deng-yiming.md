@@ -8,7 +8,7 @@ status: published
 authors: [deng-yiming]
 tags: [成员, 深度学习, 遥感, 图像分割, 深度图]
 grade: "23"
-avatarUrl: https://github.com/dymgithub.png
+avatarUrl: https://avatars.githubusercontent.com/dymgithub?size=192
 contacts:
   - label: GitHub
     value: dymgithub

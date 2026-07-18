@@ -8,7 +8,7 @@ status: published
 authors: [zhen-cheng]
 tags: [成员, 机器学习, 深度学习]
 grade: "23"
-avatarUrl: https://github.com/Hi-Zachary.png
+avatarUrl: https://avatars.githubusercontent.com/Hi-Zachary?size=192
 contacts:
   - label: GitHub
     value: Hi-Zachary

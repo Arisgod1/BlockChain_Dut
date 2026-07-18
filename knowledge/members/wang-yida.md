@@ -8,7 +8,7 @@ status: published
 authors: [wang-yida]
 tags: [成员, 游戏开发, GDScript, Blender]
 grade: "24"
-avatarUrl: https://github.com/ksyou233.png
+avatarUrl: https://avatars.githubusercontent.com/ksyou233?size=192
 contacts:
   - label: GitHub
     value: ksyou233

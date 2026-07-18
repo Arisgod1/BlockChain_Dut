@@ -8,7 +8,7 @@ status: published
 authors: [wang-mingfu]
 tags: [成员, Flutter, 前端]
 grade: "24"
-avatarUrl: https://github.com/MF33006.png
+avatarUrl: https://avatars.githubusercontent.com/MF33006?size=192
 contacts:
   - label: GitHub
     value: MF33006

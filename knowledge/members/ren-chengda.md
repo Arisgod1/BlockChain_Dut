@@ -8,7 +8,7 @@ status: published
 authors: [ren-chengda]
 tags: [成员, Java, Python, 后端, 深度学习]
 grade: "24"
-avatarUrl: https://github.com/enderrcd.png
+avatarUrl: https://avatars.githubusercontent.com/enderrcd?size=192
 contacts:
   - label: GitHub
     value: enderrcd

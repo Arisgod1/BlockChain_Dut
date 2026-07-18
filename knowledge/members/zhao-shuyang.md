@@ -8,7 +8,7 @@ status: published
 authors: [zhao-shuyang]
 tags: [成员, Vue, TypeScript, 前端, Agent]
 grade: "24"
-avatarUrl: https://github.com/qin-net.png
+avatarUrl: https://avatars.githubusercontent.com/qin-net?size=192
 contacts:
   - label: GitHub
     value: qin-net

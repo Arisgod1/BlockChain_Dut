@@ -8,7 +8,7 @@ status: published
 authors: [ma-yuhao]
 tags: [成员, Go, 后端]
 grade: "24"
-avatarUrl: https://github.com/yinxiangpingfan.png
+avatarUrl: https://avatars.githubusercontent.com/yinxiangpingfan?size=192
 contacts:
   - label: GitHub
     value: yinxiangpingfan

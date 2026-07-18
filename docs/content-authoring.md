@@ -97,7 +97,7 @@ heldAt: 2026-07-17T19:00:00+08:00
 
 ### 成员介绍
 
-额外字段：`grade` 使用两位入学年份（如 `"23"`），`avatarUrl` 使用本人公开 GitHub 账号的 `https://github.com/<account>.png`，`contacts` 是本人确认公开的联系方式数组。角色通过 `tags` 标记“组长”“老师”或“成员”，也可以继续添加研究兴趣标签。禁止加入私人联系方式、学号、宿舍、未授权照片或内部账号。
+额外字段：`grade` 使用两位入学年份（如 `"23"`），`avatarUrl` 使用本人公开 GitHub 账号的 `https://avatars.githubusercontent.com/<account>?size=192`，`contacts` 是本人确认公开的联系方式数组。角色通过 `tags` 标记“组长”“老师”或“成员”，也可以继续添加研究兴趣标签。禁止加入私人联系方式、学号、宿舍、未授权照片或内部账号。
 
 ```yaml
 grade: "23"

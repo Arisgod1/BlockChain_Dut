@@ -45,6 +45,9 @@ test('member cards expose grade and detail affordance', async ({ page }) => {
   await expect(backendTag).toHaveAttribute('aria-pressed', 'true');
   const card = page.getByRole('link', { name: '查看唐明迪的成员资料' });
   await expect(card).toBeVisible();
+  const avatar = card.locator('img');
+  await expect(avatar).toHaveAttribute('src', /avatars\.githubusercontent\.com\/Arisgod1/);
+  await expect.poll(() => avatar.evaluate((image: HTMLImageElement) => image.naturalWidth)).toBeGreaterThan(0);
   await expect(card).toContainText('23 级');
   await expect(card).toContainText('GitHub · Arisgod1');
   await page.getByRole('group', { name: '技术标签筛选' }).getByRole('button', { name: '全部', exact: true }).click();
