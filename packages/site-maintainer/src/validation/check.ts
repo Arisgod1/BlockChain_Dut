@@ -4,6 +4,7 @@ import fg from 'fast-glob';
 import sharp from 'sharp';
 import { readKnowledge, readManifest } from '../generator/generate.js';
 import { root } from '../lib.js';
+import { validateExternalImages } from './external-images.js';
 
 const sensitivePatterns = [
   /-----BEGIN (?:RSA |EC |OPENSSH )?PRIVATE KEY-----/,
@@ -19,6 +20,7 @@ export async function checkAll() {
   const publicUrls = new Set(['/', '/tracks/', '/meetings/', '/projects/', '/members/', '/about/', '/search/', ...items.filter((item) => item.data.status !== 'draft').map((item) => `/${routeByType[item.data.type]}/${item.data.id}/`)]);
   const imageNames = new Set<string>();
   for (const item of items) {
+    errors.push(...validateExternalImages(item.body, item.sourcePath));
     for (const pattern of sensitivePatterns) if (pattern.test(item.raw)) errors.push(`${item.sourcePath}: possible sensitive information`);
     const publicDate = item.data.type === 'meeting' ? item.data.heldAt : item.data.type === 'project' ? item.data.createdAt : item.data.publishedAt;
     if (item.data.updatedAt.toISOString().slice(0, 10) < publicDate.toISOString().slice(0, 10)) errors.push(`${item.sourcePath}: updatedAt precedes public date`);
