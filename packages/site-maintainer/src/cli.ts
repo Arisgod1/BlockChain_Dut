@@ -94,6 +94,13 @@ program.command('ci-policy')
   });
 
 program.command('publish').action(async () => {
+  ensureRepository();
+  run('git', ['fetch', 'origin', '+refs/heads/main:refs/remotes/origin/main']);
+  try {
+    git('merge-base', '--is-ancestor', 'origin/main', 'HEAD');
+  } catch {
+    throw new Error('release branch is behind origin/main; update it and regenerate before publishing');
+  }
   await checkAll();
   const manifest = readManifest();
   if (manifest.processedSourceCommit !== sourceCommit()) throw new Error('manifest is stale; run update again');

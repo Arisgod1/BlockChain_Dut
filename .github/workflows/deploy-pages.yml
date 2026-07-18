@@ -54,7 +54,7 @@ jobs:
       - run: pnpm typecheck
       - run: pnpm test
       - run: pnpm exec playwright install --with-deps chromium
-      - run: pnpm test:e2e --project=mobile --project=desktop
+      - run: pnpm test:e2e
       - run: pnpm build
       - run: pnpm test:budgets
       - uses: treosh/lighthouse-ci-action@v12
