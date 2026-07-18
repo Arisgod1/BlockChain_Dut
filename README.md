@@ -12,8 +12,9 @@
 - Astro 负责静态展示，Pagefind 提供全文搜索。
 - `site-maintainer` CLI 和仓库内 Skill 负责校验与确定性生成。
 - 生成失败不会覆盖当前正式生成结果。
-- GitHub Actions 运行构建、页面、无障碍、视觉和 Lighthouse 检查。
-- `main` 验证通过后部署至 GitHub Pages。
+- 内容 PR 只做格式与安全检查，合入 `main` 不会自动上线。
+- 维护者在 `release/*` 分支生成、预览并完成全量回归。
+- 只有手动 Deploy Production 工作流会部署 Pages；`production` 始终指向最后一次成功部署。
 
 普通内容贡献者只修改 `knowledge/`，不要手工编辑 `site/src/content/generated/` 或 `site/public/generated/`。完整步骤见 [贡献指南](./CONTRIBUTING.md)。
 

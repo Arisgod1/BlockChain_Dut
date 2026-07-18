@@ -1,6 +1,6 @@
 interface:
   display_name: "知识库站点维护"
-  short_description: "安全检查、生成、预览并发布知识库内容和图片更新"
-  default_prompt: "使用 $site-maintainer 检查并安全更新当前知识库网站。"
+  short_description: "安全检查、生成、预览并准备知识库发布 PR"
+  default_prompt: "使用 $site-maintainer 检查内容、生成网站并准备人工审核的 release PR，不要直接部署。"
 policy:
   allow_implicit_invocation: true

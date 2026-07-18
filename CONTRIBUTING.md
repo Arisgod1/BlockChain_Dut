@@ -176,13 +176,14 @@ PR 描述应说明：
 
 ## 网站生成与发布流程
 
-以下步骤由维护者在内容 PR 合入后执行。
+内容 PR 合入 `main` 只表示事实源已被接受，不会生成页面或触发部署。以下步骤由维护者在决定上线时执行。
 
 ### 1. 更新生成层
 
 ```bash
 git switch main
-git pull --ff-only
+git pull --ff-only origin main
+git switch -c release/$(date +%Y%m%d)-content
 pnpm site-maintainer check
 pnpm site-maintainer update
 ```
@@ -225,7 +226,7 @@ pnpm build
 pnpm preview
 ```
 
-### 4. 创建网站更新 PR
+### 4. 创建 Release PR
 
 先提交已审查的生成结果：
 
@@ -235,9 +236,15 @@ git commit -m "site: publish content update"
 pnpm site-maintainer publish
 ```
 
-`publish` 会重新检查基线，推送 `site/update-<date>-<sha>` 分支并创建草稿 PR，不会自动合并。
+`publish` 会重新检查基线和完整页面回归，推送 `release/<date>-<source-sha>` 分支并创建指向 `main` 的草稿 PR。如果已手工创建 release 分支，可直接推送并用 `gh pr create --draft --base main` 创建 PR。
 
-网站 PR 合入 `main` 后，GitHub Actions 会运行内容检查、确定性重建、类型检查、单元测试、Playwright、axe、构建、资源预算和 Lighthouse。全部通过后才部署 GitHub Pages；部署失败时保留上一成功版本。
+Release PR 会运行确定性全量重建、类型检查、单元测试、Playwright、axe、构建、资源预算和 Lighthouse。全部通过且完成人工预览后，将它合入 `main`。
+
+### 5. 手动部署 Production
+
+在 GitHub Actions 打开 **Deploy Production**，点击 **Run workflow**，输入已合入 `main` 的发布提交 SHA。工作流会重新运行全部发布门槛，部署成功后才将 `production` 快进到该 SHA，并创建 `deploy-YYYYMMDD-<sha>` Tag。
+
+`main` 表示最新已接受内容，可以领先线上；`production` 表示最后成功部署的版本。不得直接修改或强制推送 `production`。
 
 ## 使用 Codex Skill
 
@@ -265,7 +272,7 @@ $site-maintainer 生成更新报告并准备发布 PR
 | `pnpm site-maintainer rebuild --all` | 从事实源全量重建 | 是 |
 | `pnpm site-maintainer rebuild --pr <number>` | 校验并重建指定已合并 PR | 是 |
 | `pnpm site-maintainer preview` | 启动本地开发预览 | 否 |
-| `pnpm site-maintainer publish` | 验证并创建网站更新草稿 PR | 产生 GitHub 变更 |
+| `pnpm site-maintainer publish` | 验证并创建 release 草稿 PR，不部署 | 产生 GitHub 变更 |
 | `pnpm validate` | 内容、类型、单测、构建和资源预算 | 构建临时产物 |
 | `pnpm test:e2e` | 页面、响应式和无障碍回归 | 测试临时产物 |
 

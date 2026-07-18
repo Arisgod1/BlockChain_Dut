@@ -1,6 +1,6 @@
 ---
 name: site-maintainer
-description: Safely validate, suggest, generate, preview, rebuild, and publish updates for the BlockChain_Dut Astro knowledge base. Use when adding, changing, renaming, archiving, or deleting knowledge Markdown or images; checking site integrity; generating the deterministic site layer; previewing affected pages; or preparing a reviewed website update pull request.
+description: Safely validate, suggest, generate, preview, rebuild, and prepare release pull requests for the BlockChain_Dut Astro knowledge base. Use when adding, changing, renaming, archiving, or deleting knowledge Markdown or images; checking content integrity; generating the deterministic site layer; previewing affected pages; or preparing a reviewed release branch without deploying it.
 ---
 
 # Site Maintainer
@@ -31,7 +31,7 @@ Do not modify components, layouts, pages, styles, or Astro configuration during 
 - Rebuild everything: `pnpm site-maintainer rebuild --all`
 - Rebuild a merged PR after verifying it is current: `pnpm site-maintainer rebuild --pr <number>`
 - Inspect locally: `pnpm site-maintainer preview`
-- Publish an already reviewed, committed update: `pnpm site-maintainer publish`
+- Prepare a reviewed, committed release PR without deploying: `pnpm site-maintainer publish`
 
 Read [references/workflow.md](references/workflow.md) before update, rebuild, or publish. Read [references/content-contract.md](references/content-contract.md) before editing knowledge files or images.
 
@@ -42,6 +42,6 @@ Read [references/workflow.md](references/workflow.md) before update, rebuild, or
 3. Run `update`; stop on any validation or determinism failure.
 4. Read `generated/update-report.md` and inspect the Git diff. Any change outside the write allowlist is a blocker.
 5. Run `preview` and inspect affected desktop and mobile routes.
-6. Run `publish` only after the user has reviewed and committed the generated update. It creates a draft PR and never merges it.
+6. Run `publish` only after the user has reviewed and committed the generated update. It creates a `release/*` draft PR targeting `main`; it never merges, deploys, or moves `production`.
 
 Do not bypass a failed check, advance the Manifest manually, reuse an old URL, or delete content that still has inbound references.

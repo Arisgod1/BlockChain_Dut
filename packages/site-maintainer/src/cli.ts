@@ -6,6 +6,7 @@ import { Command } from 'commander';
 import { checkAll } from './validation/check.js';
 import { describeChanges, generateCandidate, installCandidate, normalizedCandidateHash, readManifest } from './generator/generate.js';
 import { ensureRepository, git, head, root, run, sourceCommit } from './lib.js';
+import { classifyChanges, writePolicyOutputs } from './validation/policy.js';
 
 const program = new Command().name('site-maintainer').description('Deterministic knowledge-site maintenance CLI').version('1.0.0');
 const tempRoot = resolve(root, '.site-maintainer-tmp');
@@ -80,6 +81,18 @@ program.command('rebuild').option('--all').option('--pr <number>').action(async 
 
 program.command('preview').action(() => run('pnpm', ['--filter', '@blockchain-dut/site', 'dev']));
 
+program.command('ci-policy')
+  .requiredOption('--base <sha>')
+  .requiredOption('--head <sha>')
+  .requiredOption('--head-ref <branch>')
+  .action((options) => {
+    const paths = git('diff', '--name-only', `${options.base}...${options.head}`).split('\n').filter(Boolean);
+    const result = classifyChanges(paths, options.headRef);
+    writePolicyOutputs(result);
+    console.log(JSON.stringify({ paths, ...result }, null, 2));
+    if (result.violations.length) throw new Error(result.violations.join('\n'));
+  });
+
 program.command('publish').action(async () => {
   await checkAll();
   const manifest = readManifest();
@@ -87,10 +100,14 @@ program.command('publish').action(async () => {
   if (git('status', '--porcelain', '--', 'knowledge')) throw new Error('commit knowledge changes before publish');
   if (git('status', '--porcelain')) throw new Error('commit the generated update before publish');
   run('pnpm', ['validate']);
-  const branch = `site/update-${new Date().toISOString().slice(0, 10).replaceAll('-', '')}-${head().slice(0, 7)}`;
-  git('switch', '-c', branch);
-  run('git', ['push', '-u', 'origin', branch]);
-  run('gh', ['pr', 'create', '--draft', '--title', `site: update ${head().slice(0, 7)}`, '--body-file', 'generated/update-report.md']);
+  run('pnpm', ['test:e2e']);
+  const branch = `release/${new Date().toISOString().slice(0, 10).replaceAll('-', '')}-${sourceCommit().slice(0, 7)}`;
+  const currentBranch = git('branch', '--show-current');
+  if (currentBranch === 'main') git('switch', '-c', branch);
+  else if (!currentBranch.startsWith('release/')) throw new Error('publish must run from main or an existing release/* branch');
+  const releaseBranch = git('branch', '--show-current');
+  run('git', ['push', '-u', 'origin', releaseBranch]);
+  run('gh', ['pr', 'create', '--draft', '--base', 'main', '--title', `site: release ${sourceCommit().slice(0, 7)}`, '--body-file', 'generated/update-report.md']);
 });
 
 program.parseAsync().catch((error) => { console.error(error instanceof Error ? error.message : error); process.exitCode = 1; });

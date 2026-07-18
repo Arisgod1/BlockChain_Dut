@@ -1,6 +1,7 @@
 name: Validate
 on:
   pull_request:
+    branches: [main]
   push:
     branches: [main]
 permissions:
@@ -18,19 +19,32 @@ jobs:
       - uses: actions/setup-node@v4
         with: { node-version: 24, cache: pnpm }
       - run: pnpm install --frozen-lockfile
+      - id: policy
+        if: github.event_name == 'pull_request'
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+          HEAD_REF: ${{ github.head_ref }}
+        run: pnpm site-maintainer ci-policy --base "$BASE_SHA" --head "$HEAD_SHA" --head-ref "$HEAD_REF"
       - run: pnpm site-maintainer check
-      - run: pnpm site-maintainer rebuild --all
-      # update-report is a review artifact relative to the previous manifest.
-      # Deterministic site content, assets, manifest, redirects, and tombstones
-      # remain covered by this comparison.
-      - run: git diff --exit-code -- . ':(exclude)generated/update-report.md'
-      - run: pnpm typecheck
-      - run: pnpm test
-      - run: pnpm exec playwright install --with-deps chromium
-      - run: pnpm test:e2e --project=mobile --project=desktop
-      - run: pnpm build
-      - run: pnpm test:budgets
-      - uses: treosh/lighthouse-ci-action@v12
+      - if: steps.policy.outputs.release == 'true'
+        run: pnpm site-maintainer rebuild --all
+      - if: steps.policy.outputs.release == 'true'
+        run: git diff --exit-code -- . ':(exclude)generated/update-report.md'
+      - if: steps.policy.outputs.full_validation == 'true'
+        run: pnpm typecheck
+      - if: steps.policy.outputs.full_validation == 'true'
+        run: pnpm test
+      - if: steps.policy.outputs.full_validation == 'true'
+        run: pnpm exec playwright install --with-deps chromium
+      - if: steps.policy.outputs.full_validation == 'true'
+        run: pnpm test:e2e --project=mobile --project=desktop
+      - if: steps.policy.outputs.full_validation == 'true'
+        run: pnpm build
+      - if: steps.policy.outputs.full_validation == 'true'
+        run: pnpm test:budgets
+      - if: steps.policy.outputs.full_validation == 'true'
+        uses: treosh/lighthouse-ci-action@v12
         with:
           configPath: ./lighthouserc.json
           uploadArtifacts: true

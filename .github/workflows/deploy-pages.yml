@@ -1,11 +1,13 @@
-name: Deploy Pages
+name: Deploy Production
 on:
-  workflow_run:
-    workflows: [Validate]
-    types: [completed]
-    branches: [main]
+  workflow_dispatch:
+    inputs:
+      release_sha:
+        description: Full or short SHA of a release commit already merged into main
+        required: true
+        type: string
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
 concurrency:
@@ -13,22 +15,67 @@ concurrency:
   cancel-in-progress: false
 jobs:
   deploy:
-    if: github.event.workflow_run.conclusion == 'success'
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
+    env:
+      TZ: UTC
     steps:
       - uses: actions/checkout@v4
-        with: { ref: '${{ github.event.workflow_run.head_sha }}' }
+        with:
+          ref: main
+          fetch-depth: 0
+      - id: candidate
+        env:
+          RELEASE_SHA: ${{ inputs.release_sha }}
+        run: |
+          if ! printf '%s' "$RELEASE_SHA" | grep -Eq '^[0-9a-fA-F]{7,40}$'; then
+            echo "release_sha must be a 7-40 character hexadecimal Git SHA" >&2
+            exit 1
+          fi
+          git fetch origin '+refs/heads/main:refs/remotes/origin/main'
+          SHA=$(git rev-parse "$RELEASE_SHA^{commit}")
+          git merge-base --is-ancestor "$SHA" origin/main
+          if git ls-remote --exit-code --heads origin production >/dev/null 2>&1; then
+            git fetch origin '+refs/heads/production:refs/remotes/origin/production'
+            git merge-base --is-ancestor origin/production "$SHA"
+          fi
+          git checkout --detach "$SHA"
+          echo "sha=$SHA" >> "$GITHUB_OUTPUT"
       - uses: pnpm/action-setup@v4
         with: { version: 11.9.0 }
       - uses: actions/setup-node@v4
         with: { node-version: 24, cache: pnpm }
       - run: pnpm install --frozen-lockfile
+      - run: pnpm site-maintainer check
+      - run: pnpm site-maintainer rebuild --all
+      - run: git diff --exit-code -- . ':(exclude)generated/update-report.md'
+      - run: pnpm typecheck
+      - run: pnpm test
+      - run: pnpm exec playwright install --with-deps chromium
+      - run: pnpm test:e2e --project=mobile --project=desktop
       - run: pnpm build
+      - run: pnpm test:budgets
+      - uses: treosh/lighthouse-ci-action@v12
+        with:
+          configPath: ./lighthouserc.json
+          uploadArtifacts: true
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with: { path: site/dist }
       - id: deployment
         uses: actions/deploy-pages@v4
+      - name: Record successful production deployment
+        env:
+          SHA: ${{ steps.candidate.outputs.sha }}
+        run: |
+          TAG="deploy-$(date -u +%Y%m%d)-${SHA:0:7}"
+          if git ls-remote --exit-code --tags origin "refs/tags/$TAG" >/dev/null 2>&1; then
+            echo "Deployment tag already exists: $TAG" >&2
+            exit 1
+          fi
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git tag -a "$TAG" "$SHA" -m "Deploy $SHA"
+          git push --atomic origin "$SHA:refs/heads/production" "refs/tags/$TAG"
