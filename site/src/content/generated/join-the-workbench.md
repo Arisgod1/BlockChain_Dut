@@ -2,7 +2,7 @@
 schemaVersion: 1
 id: join-the-workbench
 title: 参与知识库维护
-summary: 用于验证“关于与加入”页面的 mock 信息，说明可以参与的工作，但不提供虚构联系方式。
+summary: 用于验证“组内动态”页面的 mock 信息，说明可以参与的工作，但不提供虚构联系方式。
 type: recruitment
 status: published
 authors:
@@ -14,6 +14,7 @@ publishedAt: 2026-07-18
 updatedAt: 2026-07-18
 cover: null
 media: []
+references: []
 ---
 
 ## 适合谁

@@ -1,9 +1,9 @@
 # Site update report
 
-Source commit: `d7fc65c3d331d308f41077acd0f33173489bd8e9`
+Source commit: `cf31183752f3add5282cda4a6a43854fdd728883`
 Generator: `1.0.0`
 
-- Added: demo-maintainer, join-the-workbench, public-knowledge-workbench, research-record-method, site-publishing-drill, sustainable-publishing-pipeline
+- Added: none
 - Changed: none
 - Deleted: none
 

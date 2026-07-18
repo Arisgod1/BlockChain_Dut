@@ -13,10 +13,18 @@ tags:
   - 部署演练
   - 例会记录
 heldAt: 2026-07-18T10:00:00+08:00
-publishedAt: 2026-07-18
 updatedAt: 2026-07-18
 cover: null
 media: []
+references:
+  - kind: guide
+    title: 研究记录方法
+    url: /tracks/research-record-method/
+    source: 区块链组知识库（部署演练）
+  - kind: project
+    title: 可持续发布流水线
+    url: /projects/sustainable-publishing-pipeline/
+    source: 区块链组知识库（部署演练）
 ---
 
 ## 内容
@@ -30,14 +38,3 @@ media: []
 - Pagefind 搜索索引
 - 桌面和移动页面
 - GitHub Actions 与 Pages 部署
-
-## 结论与行动项
-
-- 演练维护者：核对生成报告和页面截图。
-- 演练维护者：确认 CI 全部通过后完成部署。
-- 待真实内容准备完成后，删除或归档本次 mock 数据。
-
-## 相关资料
-
-- [研究记录方法](/tracks/research-record-method/)
-- [可持续发布流水线](/projects/sustainable-publishing-pipeline/)
