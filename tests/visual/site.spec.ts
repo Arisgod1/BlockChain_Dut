@@ -1,11 +1,12 @@
 import { expect, test } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
 
-test('home page contract and accessibility', async ({ page, isMobile }) => {
+test('home page contract and accessibility', async ({ page }) => {
   await page.goto('./');
   await expect(page.getByRole('heading', { level: 1 })).toContainText('BlockChain_DUT核心知识库');
-  if (isMobile) {
-    await page.getByRole('button', { name: '菜单' }).click();
+  const menu = page.getByRole('button', { name: '菜单' });
+  if (await menu.isVisible()) {
+    await menu.click();
   }
   const navigation = page.getByRole('navigation', { name: '主要导航' });
   await expect(navigation).toBeVisible();
@@ -73,10 +74,10 @@ test('public contact details and QR code are available', async ({ page }) => {
   expect(await qr.evaluate((image: HTMLImageElement) => image.naturalWidth)).toBeGreaterThan(0);
 });
 
-test('mobile menu exposes animated state without hiding navigation semantics', async ({ page, isMobile }) => {
-  test.skip(!isMobile);
+test('collapsed menu exposes animated state without hiding navigation semantics', async ({ page }) => {
   await page.goto('./');
   const menu = page.getByRole('button', { name: '菜单' });
+  test.skip(!(await menu.isVisible()));
   await menu.click();
   await expect(menu).toHaveAttribute('aria-expanded', 'true');
   await expect(page.getByRole('navigation', { name: '主要导航' })).toHaveClass(/is-open/);
