@@ -1,6 +1,6 @@
 # Site update report
 
-Source commit: `766584ecfd58bc286c77ff08b25ec6aaaaad6845`
+Source commit: `6b2d2dc4d8d07e090cafa6615e35b41f8020b403`
 Generator: `1.0.0`
 
 - Added: none

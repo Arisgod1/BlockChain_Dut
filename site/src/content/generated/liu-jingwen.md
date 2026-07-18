@@ -8,7 +8,7 @@ status: published
 authors: [liu-jingwen]
 tags: [成员, 深度学习, AI, Node.js, 数据库]
 grade: "23"
-avatarUrl: https://github.com/ywlbywl.png
+avatarUrl: https://avatars.githubusercontent.com/ywlbywl?size=192
 contacts:
   - label: GitHub
     value: ywlbywl

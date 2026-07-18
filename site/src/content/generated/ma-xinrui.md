@@ -8,7 +8,7 @@ status: published
 authors: [ma-xinrui]
 tags: [成员, Diffusion, 图像处理, 前端]
 grade: "24"
-avatarUrl: https://github.com/IHIRINA.png
+avatarUrl: https://avatars.githubusercontent.com/IHIRINA?size=192
 contacts:
   - label: GitHub
     value: IHIRINA

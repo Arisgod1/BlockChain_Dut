@@ -8,7 +8,7 @@ status: published
 authors: [sun-changxiang]
 tags: [成员, Android, 前端, 多媒体, 设计]
 grade: "24"
-avatarUrl: https://github.com/CHANCE719.png
+avatarUrl: https://avatars.githubusercontent.com/CHANCE719?size=192
 contacts:
   - label: GitHub
     value: CHANCE719

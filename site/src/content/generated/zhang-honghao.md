@@ -8,7 +8,7 @@ status: published
 authors: [zhang-honghao]
 tags: [成员, Java, 中间件, 脚本, 插件]
 grade: "24"
-avatarUrl: https://github.com/zhh293.png
+avatarUrl: https://avatars.githubusercontent.com/zhh293?size=192
 contacts:
   - label: GitHub
     value: zhh293

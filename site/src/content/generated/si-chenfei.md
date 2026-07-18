@@ -8,7 +8,7 @@ status: published
 authors: [si-chenfei]
 tags: [成员, 算法, C++, 机器学习, 前端, 后端]
 grade: "24"
-avatarUrl: https://github.com/stars569.png
+avatarUrl: https://avatars.githubusercontent.com/stars569?size=192
 contacts:
   - label: GitHub
     value: stars569

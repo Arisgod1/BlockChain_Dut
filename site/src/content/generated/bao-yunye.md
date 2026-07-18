@@ -8,7 +8,7 @@ status: published
 authors: [bao-yunye]
 tags: [成员, 前端]
 grade: "24"
-avatarUrl: https://github.com/YYiee.png
+avatarUrl: https://avatars.githubusercontent.com/YYiee?size=192
 contacts:
   - label: GitHub
     value: YYiee
