@@ -1,5 +1,18 @@
 ---
-import BaseLayout from '../../layouts/BaseLayout.astro'; import PageIntro from '../../components/PageIntro.astro'; import EntryList from '../../components/EntryList.astro'; import { publicEntries } from '../../lib/content';
-const entries=(await publicEntries()).filter(e=>e.data.type==='meeting');
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageIntro from '../../components/PageIntro.astro';
+import EntryList from '../../components/EntryList.astro';
+import FilterBar from '../../components/FilterBar.astro';
+import { publicEntries } from '../../lib/content';
+const all = await publicEntries();
+const entries = all.filter((entry) => entry.data.type === 'meeting');
+const members = all.filter((entry) => entry.data.type === 'member');
+const years = [...new Set(entries.map((entry) => String(entry.data.type === 'meeting' && entry.data.heldAt.getFullYear())))].sort().reverse();
 ---
-<BaseLayout title="例会｜区块链组知识库"><PageIntro code="MEETING LOG" title="例会" description="保留议题、结论、行动项和相关资料，让讨论可以继续追踪。" /><section class="content-shell section-block"><EntryList entries={entries} empty="尚无已发布的例会记录。" /></section></BaseLayout>
+<BaseLayout title="例会｜区块链组知识库">
+  <PageIntro code="MEETING LOG" title="例会" description="归档各次例会，可以查看每次例会的详情。" />
+  <section class="content-shell collection-panel" data-filter-scope>
+    <FilterBar years={years} gradeLabel="例会时间" />
+    <EntryList entries={entries} members={members} empty="尚无已发布的例会记录。" />
+  </section>
+</BaseLayout>

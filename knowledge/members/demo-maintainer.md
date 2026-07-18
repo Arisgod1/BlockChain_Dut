@@ -8,12 +8,16 @@ status: published
 authors:
   - demo-maintainer
 tags:
+  - 成员
   - 部署演练
   - 内容维护
+grade: "23"
+contacts: []
 publishedAt: 2026-07-18
 updatedAt: 2026-07-18
 cover: null
 media: []
+references: []
 ---
 
 ## 简介

@@ -32,7 +32,7 @@
 │   ├── group/                       # 小组说明
 │   ├── tracks/                      # 技术方向
 │   ├── meetings/                    # 例会记录
-│   ├── projects/                    # 项目成果
+│   ├── projects/                    # 项目
 │   ├── members/                     # 成员公开资料
 │   ├── recruitment/                 # 加入信息
 │   ├── assets/                      # 原始图片
@@ -106,6 +106,8 @@ status: draft
 
 文件名、`id`、作者、日期、链接和状态必须来自已确认事实，不能由模型推断。
 
+所有相关资料必须写入 Frontmatter 的 `references`，并注明资料类型、标题、链接和来源；正文不再维护自由格式的“相关资料”列表。
+
 ### 2. 检查草稿
 
 ```bash
@@ -175,10 +177,12 @@ pnpm site-maintainer publish
 
 | 用途 | 目录 |
 | --- | --- |
-| 全站品牌、合影、加入入口 | `knowledge/assets/site/` |
-| 文章和项目封面 | `knowledge/assets/covers/` |
-| 正文截图、图表、白板、设备照片 | `knowledge/assets/inline/` |
-| 经本人授权的成员头像 | `knowledge/assets/avatars/` |
+| Logo、招牌、加入图标 | `knowledge/assets/site/brand/` |
+| 首页合影等长期照片 | `knowledge/assets/site/photos/` |
+| 内容封面 | `knowledge/assets/covers/<type>/<entry-id>/cover.ext` |
+| 正文截图、图表和照片 | `knowledge/assets/inline/<type>/<entry-id>/NN-subject.ext` |
+| 经本人授权的成员头像 | `knowledge/assets/avatars/<member-id>/avatar.ext` |
+| 多篇内容共用的活动精选图 | `knowledge/assets/events/<yyyy>/<event-id>/NN-subject.ext` |
 
 文件名只能使用小写英文、数字和连字符。每张正文图片都要在文档的 `media` 中登记路径、alt、来源和版权状态。
 
@@ -213,7 +217,7 @@ Skill 入口见 [.agents/skills/site-maintainer/SKILL.md](./.agents/skills/site-
 - 摘要候选
 - 内容关联候选
 - 导航文案候选
-- 知识地图整理建议
+- 内容结构整理建议
 
 模型不能直接决定或推断：
 

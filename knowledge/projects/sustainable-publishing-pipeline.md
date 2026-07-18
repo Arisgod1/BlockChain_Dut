@@ -2,7 +2,7 @@
 schemaVersion: 1
 id: sustainable-publishing-pipeline
 title: 可持续发布流水线
-summary: 用于验证项目成果页面的 mock 项目，展示内容检查、原子生成、回归测试和部署之间的关系。
+summary: 用于验证项目页面的 mock 内容，展示内容检查、原子生成、回归测试和部署之间的关系。
 type: project
 status: published
 authors:
@@ -14,6 +14,15 @@ publishedAt: 2026-07-18
 updatedAt: 2026-07-18
 cover: null
 media: []
+references:
+  - kind: meeting
+    title: 站点发布演练
+    url: /meetings/site-publishing-drill/
+    source: 区块链组知识库（部署演练）
+  - kind: guide
+    title: 研究记录方法
+    url: /tracks/research-record-method/
+    source: 区块链组知识库（部署演练）
 ---
 
 ## 背景
@@ -43,8 +52,3 @@ pnpm site-maintainer update
 pnpm validate
 pnpm site-maintainer preview
 ```
-
-## 相关资料
-
-- [站点发布演练](/meetings/site-publishing-drill/)
-- [研究记录方法](/tracks/research-record-method/)

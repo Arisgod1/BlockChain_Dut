@@ -1,19 +1,21 @@
 ---
 import type { KnowledgeEntry } from '../lib/content';
-import { dateText, entryPath, labels } from '../lib/content';
-const { entries, empty = '目前还没有已发布内容。' } = Astro.props as { entries: KnowledgeEntry[]; empty?: string };
+import { dateText, entryPath, labels, publicDate } from '../lib/content';
+const { entries, empty = '目前还没有已发布内容。', members = [] } = Astro.props as { entries: KnowledgeEntry[]; empty?: string; members?: KnowledgeEntry[] };
+const memberById = new Map(members.map((entry) => [entry.data.id, entry]));
 ---
 {entries.length ? (
   <ol class="entry-list">
     {entries.map((entry) => (
-      <li>
-        <a href={entryPath(entry)}>
+      <li data-filter-item data-tags={entry.data.tags.join('|')} data-year={String(publicDate(entry).getFullYear())}>
+        <a class="entry-link" href={entryPath(entry)}>
           <span class="entry-main"><strong>{entry.data.title}</strong><span>{entry.data.summary}</span></span>
           <span class="entry-meta">
-            <span>{labels[entry.data.type]}</span><time datetime={entry.data.updatedAt.toISOString()}>{dateText(entry.data.updatedAt)}</time>
+            <span>{labels[entry.data.type]}</span><time datetime={publicDate(entry).toISOString()}>{dateText(publicDate(entry))}</time>
             {entry.data.status === 'archived' && <span class="status archived">已归档</span>}
           </span>
         </a>
+        {entry.data.type === 'meeting' && <div class="entry-speakers"><span>主讲人</span>{entry.data.speakers.map((id) => memberById.get(id)).filter(Boolean).map((member) => <a href={entryPath(member!)}>{member!.data.title}</a>)}</div>}
       </li>
     ))}
   </ol>

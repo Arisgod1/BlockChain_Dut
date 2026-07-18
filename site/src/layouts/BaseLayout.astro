@@ -4,7 +4,7 @@ const { title = '区块链组知识库', description = '区块链组公开知识
 const base = import.meta.env.BASE_URL;
 const current = Astro.url.pathname;
 const navigation = [
-  ['首页', ''], ['技术指导', 'tracks/'], ['例会', 'meetings/'], ['成员', 'members/'], ['关于与加入', 'about/'],
+  ['首页', ''], ['技术指导', 'tracks/'], ['例会', 'meetings/'], ['项目', 'projects/'], ['成员', 'members/'], ['组内动态', 'about/'],
 ];
 const href = (path: string) => `${base.replace(/\/$/, '')}/${path.replace(/^\//, '')}`;
 ---
@@ -28,10 +28,11 @@ const href = (path: string) => `${base.replace(/\/$/, '')}/${path.replace(/^\//,
         </a>
         <button class="menu-button" type="button" aria-expanded="false" aria-controls="primary-nav">菜单</button>
         <nav id="primary-nav" class="primary-nav" aria-label="主要导航">
+          <span class="nav-indicator" aria-hidden="true"></span>
           {navigation.map(([label, path]) => {
             const url = href(path);
             const active = path === '' ? current === base || current === `${base}/` : current.startsWith(url);
-            return <a href={url} aria-current={active ? 'page' : undefined}>{label}</a>;
+            return <a href={url} data-nav-item aria-current={active ? 'page' : undefined}>{label}</a>;
           })}
           <a class="search-link" href={href('search/')}>搜索 <span aria-hidden="true">⌕</span></a>
         </nav>
@@ -40,7 +41,7 @@ const href = (path: string) => `${base.replace(/\/$/, '')}/${path.replace(/^\//,
     <main id="content" data-pagefind-body><slot /></main>
     <footer class="site-footer">
       <div><strong>区块链组知识库</strong><p>公开、可追溯、持续维护的研究记录。</p></div>
-      <a href={href('about/')}>关于与加入</a>
+      <a href={href('about/')}>组内动态</a>
     </footer>
     <script>
       const button = document.querySelector('.menu-button');
@@ -50,6 +51,29 @@ const href = (path: string) => `${base.replace(/\/$/, '')}/${path.replace(/^\//,
         button.setAttribute('aria-expanded', String(!open));
         nav?.classList.toggle('is-open', !open);
       });
+
+      const indicator = nav?.querySelector<HTMLElement>('.nav-indicator');
+      const navItems = [...(nav?.querySelectorAll<HTMLAnchorElement>('[data-nav-item]') ?? [])];
+      const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+      const moveIndicator = (item?: HTMLElement | null) => {
+        if (!indicator || !item || window.innerWidth <= 800) return;
+        indicator.style.setProperty('--nav-x', `${item.offsetLeft}px`);
+        indicator.style.setProperty('--nav-width', `${item.offsetWidth}px`);
+        indicator.classList.add('is-ready');
+      };
+      const activeItem = () => navItems.find((item) => item.getAttribute('aria-current') === 'page') ?? navItems[0];
+      moveIndicator(activeItem());
+      navItems.forEach((item) => {
+        item.addEventListener('pointerenter', () => moveIndicator(item));
+        item.addEventListener('pointerleave', () => moveIndicator(activeItem()));
+        item.addEventListener('click', (event) => {
+          if (reducedMotion.matches || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || event.button !== 0) return;
+          event.preventDefault();
+          moveIndicator(item);
+          window.setTimeout(() => { window.location.href = item.href; }, 140);
+        });
+      });
+      window.addEventListener('resize', () => moveIndicator(activeItem()));
     </script>
   </body>
 </html>

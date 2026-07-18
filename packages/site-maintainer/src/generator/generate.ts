@@ -41,19 +41,52 @@ function assetHash(path: string) {
   return sha256(readFileSync(resolve(root, 'knowledge', path.replace(/^\//, ''))));
 }
 
+async function removeConnectedWhite(source: string) {
+  const { data, info } = await sharp(source).rotate().ensureAlpha().raw().toBuffer({ resolveWithObject: true });
+  const { width, height, channels } = info;
+  const seen = new Uint8Array(width * height);
+  const queue = new Int32Array(width * height);
+  let head = 0;
+  let tail = 0;
+  const isWhite = (index: number) => {
+    const offset = index * channels;
+    return data[offset] >= 245 && data[offset + 1] >= 245 && data[offset + 2] >= 245 && data[offset + 3] > 0;
+  };
+  const enqueue = (index: number) => {
+    if (seen[index] || !isWhite(index)) return;
+    seen[index] = 1;
+    queue[tail++] = index;
+  };
+  for (let x = 0; x < width; x += 1) { enqueue(x); enqueue((height - 1) * width + x); }
+  for (let y = 0; y < height; y += 1) { enqueue(y * width); enqueue(y * width + width - 1); }
+  while (head < tail) {
+    const index = queue[head++];
+    const x = index % width;
+    const y = Math.floor(index / width);
+    data[index * channels + 3] = 0;
+    if (x > 0) enqueue(index - 1);
+    if (x + 1 < width) enqueue(index + 1);
+    if (y > 0) enqueue(index - width);
+    if (y + 1 < height) enqueue(index + width);
+  }
+  return sharp(data, { raw: { width, height, channels } });
+}
+
 async function processAssets(items: ParsedContent[], outputRoot: string) {
   const paths = new Set<string>();
   for (const item of items) {
     if (item.data.cover) paths.add(item.data.cover);
     for (const media of item.data.media) paths.add(media.path);
   }
-  const siteAssets = ['blockchain-group-sign.png', 'recruitment-mark.png'];
+  const siteAssets = ['recruitment-mark.png'];
   mkdirSync(resolve(outputRoot, 'assets/site'), { recursive: true });
   for (const filename of siteAssets) {
-    const source = resolve(root, 'knowledge/assets/site', filename);
+    const source = resolve(root, 'knowledge/assets/site/brand', filename);
     if (existsSync(source)) await sharp(source).rotate().trim().resize(1000, 1000, { fit: 'inside', withoutEnlargement: true }).png({ compressionLevel: 9 }).toFile(resolve(outputRoot, 'assets/site', filename));
   }
-  const photo = resolve(root, 'knowledge/assets/site/group-photo-original.jpg');
+  const sign = resolve(root, 'knowledge/assets/site/brand/blockchain-group-sign.png');
+  if (existsSync(sign)) await (await removeConnectedWhite(sign)).trim().resize(1000, 1000, { fit: 'inside', withoutEnlargement: true }).png({ compressionLevel: 9 }).toFile(resolve(outputRoot, 'assets/site/blockchain-group-sign.png'));
+  const photo = resolve(root, 'knowledge/assets/site/photos/group-photo-original.jpg');
   if (existsSync(photo)) {
     await sharp(photo).rotate().resize(1600, 1067, { fit: 'cover' }).webp({ quality: 78 }).toFile(resolve(outputRoot, 'assets/site/group-photo-1600.webp'));
     await sharp(photo).rotate().resize(800, 533, { fit: 'cover' }).webp({ quality: 78 }).toFile(resolve(outputRoot, 'assets/site/group-photo-800.webp'));
@@ -93,7 +126,7 @@ export async function generateCandidate(candidateRoot: string, sourcePr: number 
     });
   }
   if (entries.length === 0) {
-    writeFileSync(resolve(contentRoot, '_empty.md'), `---\nschemaVersion: 1\nid: collection-empty\ntitle: 空集合占位\nsummary: 仅用于保持内容集合可初始化，不会生成公开页面。\ntype: group\nstatus: draft\nauthors:\n  - system\ntags:\n  - system\npublishedAt: 1970-01-01\nupdatedAt: 1970-01-01\ncover: null\nmedia: []\n---\n`);
+    writeFileSync(resolve(contentRoot, '_empty.md'), `---\nschemaVersion: 1\nid: collection-empty\ntitle: 空集合占位\nsummary: 仅用于保持内容集合可初始化，不会生成公开页面。\ntype: group\nstatus: draft\nauthors:\n  - system\ntags:\n  - system\npublishedAt: 1970-01-01\nupdatedAt: 1970-01-01\ncover: null\nmedia: []\nreferences: []\n---\n`);
   }
 
   const activeIds = new Set(entries.map((entry) => entry.id));

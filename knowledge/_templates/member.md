@@ -9,10 +9,13 @@ authors:
   - member-public-id
 tags:
   - 成员
+grade: "23"
+contacts: []
 publishedAt: 2026-07-17
 updatedAt: 2026-07-17
 cover: null
 media: []
+references: []
 ---
 
 ## 简介
@@ -21,4 +24,4 @@ media: []
 
 ## 公开成果
 
-<!-- 不填写学号、私人联系方式、宿舍或未确认的个人信息。 -->
+<!-- 联系方式只填写本人确认公开的信息；不填写学号、宿舍或未确认的个人信息。 -->

@@ -1,0 +1,28 @@
+---
+import type { KnowledgeEntry } from '../lib/content';
+import { entryPath } from '../lib/content';
+const { entries } = Astro.props as { entries: KnowledgeEntry[] };
+---
+<ol class="member-grid">
+  {entries.map((entry) => entry.data.type === 'member' && (
+    <li data-filter-item data-tags={entry.data.tags.join('|')} data-year={entry.data.grade}>
+      <a class="member-card" href={entryPath(entry)} aria-label={`查看${entry.data.title}的成员资料`}>
+        <span class="member-card-inner">
+          <span class="member-card-face member-card-front">
+            <span class="member-role">{entry.data.tags.find((tag) => ['组长', '老师', '成员'].includes(tag)) ?? '成员'}</span>
+            <strong>{entry.data.title}</strong>
+            <span class="member-grade">{entry.data.grade} 级</span>
+            <span class="member-tags">{entry.data.tags.filter((tag) => !['组长', '老师', '成员'].includes(tag)).slice(0, 3).join(' · ') || '公开成员资料'}</span>
+            <small>悬停查看简介</small>
+          </span>
+          <span class="member-card-face member-card-back">
+            <strong>个人简介</strong>
+            <span>{entry.data.summary}</span>
+            <span class="member-contact">{entry.data.contacts[0] ? `${entry.data.contacts[0].label} · ${entry.data.contacts[0].value}` : '联系方式暂未公开'}</span>
+            <small>点击进入详情 →</small>
+          </span>
+        </span>
+      </a>
+    </li>
+  ))}
+</ol>

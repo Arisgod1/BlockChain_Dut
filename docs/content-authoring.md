@@ -9,7 +9,7 @@
 | 小组说明 | `knowledge/group/` | `group` |
 | 技术方向 | `knowledge/tracks/` | `track` |
 | 例会记录 | `knowledge/meetings/` | `meeting` |
-| 项目成果 | `knowledge/projects/` | `project` |
+| 项目 | `knowledge/projects/` | `project` |
 | 成员介绍 | `knowledge/members/` | `member` |
 | 加入信息 | `knowledge/recruitment/` | `recruitment` |
 
@@ -37,10 +37,11 @@ authors:
   - member-example
 tags:
   - 示例标签
-publishedAt: 2026-07-17
+publishedAt: 2026-07-17 # 非例会类型必填
 updatedAt: 2026-07-17
 cover: null
 media: []
+references: []
 ---
 ```
 
@@ -54,15 +55,29 @@ media: []
 - `status`：`draft | published | archived`。`draft` 不公开；`published` 公开；`archived` 仍公开但显示明确归档标记。
 - `authors`：引用 `knowledge/members/` 中的成员 ID；不允许凭空推断作者。
 - `tags`：建议 1–5 个，使用现有标签表，避免同义词重复。
-- `publishedAt`、`updatedAt`：ISO 日期 `YYYY-MM-DD`，修改正文时更新 `updatedAt`。
+- `updatedAt`：所有类型必填的 ISO 日期 `YYYY-MM-DD`，修改正文时同步更新。
+- `publishedAt`：仅非例会类型必填。例会禁止使用该旧字段，只使用 `heldAt`。
 - `cover`：无封面写 `null`；有封面时使用从 `knowledge/` 起算的绝对内容路径。
 - `media`：登记正文使用的每张图片，规则见 `docs/image-guidelines.md`。
+- `references`：结构化相关资料。每一项必须同时填写类型、标题、链接和来源；没有相关资料时写 `[]`。
+
+相关资料示例：
+
+```yaml
+references:
+  - kind: article
+    title: 示例文章
+    url: https://example.com/article
+    source: 发布组织或作者
+```
+
+`kind` 只允许：`article`（文章）、`project`（项目）、`meeting`（例会）、`guide`（技术指导）、`document`（文档）、`video`（视频）、`website`（网站）、`dataset`（数据集）、`other`（其他）。内部资料使用以 `/` 开头的站内路径；外部资料必须使用 HTTP(S) 链接。
 
 ## 4. 各类型正文结构
 
 ### 技术方向
 
-固定顺序：方向介绍、知识地图、推荐路径、实践项目、相关例会、作者。可增加小节，但不可删除这些一级结构。
+固定顺序：内容、作者。“内容”可按主题自行增加三级标题，分类使用开放的 `tags`；相关项目、例会和文章统一写入 `references`。
 
 ### 例会记录
 
@@ -74,15 +89,23 @@ speakers:
 heldAt: 2026-07-17T19:00:00+08:00
 ```
 
-正文固定顺序：内容、结论与行动项、相关资料。事实不明确时写“待确认”，不要让生成工具补全。
+`heldAt` 是准确的例会日期与时间，也是例会列表的筛选和排序依据。`speakers` 必须引用已发布成员 ID，页面会链接到成员详情。正文只写内容，资料统一写入 `references`。
 
-### 项目成果
+### 项目
 
-建议顺序：背景、目标、当前状态、成果、复现或使用方式、相关资料。
+建议顺序：背景、目标、当前状态、成果、复现或使用方式。资料统一写入 `references`。
 
 ### 成员介绍
 
-只公开本人确认的信息。禁止加入私人联系方式、学号、宿舍、未授权照片或内部账号。
+额外字段：`grade` 使用两位入学年份（如 `"23"`），`contacts` 是本人确认公开的联系方式数组。角色通过 `tags` 标记“组长”“老师”或“成员”，也可以继续添加研究兴趣标签。禁止加入私人联系方式、学号、宿舍、未授权照片或内部账号。
+
+```yaml
+grade: "23"
+contacts:
+  - label: GitHub
+    value: public-account
+    url: https://github.com/public-account
+```
 
 ### 小组说明与加入信息
 

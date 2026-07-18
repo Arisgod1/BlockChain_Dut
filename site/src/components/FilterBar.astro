@@ -1,0 +1,46 @@
+---
+const { tags = [], years = [], gradeLabel = '时间' } = Astro.props as { tags?: string[]; years?: string[]; gradeLabel?: string };
+---
+<div class="content-filter" data-filter-root>
+  {tags.length > 0 && <div class="filter-group" aria-label="标签筛选">
+    <span>标签</span>
+    <button type="button" class="is-active" data-tag="all" aria-pressed="true">全部</button>
+    {tags.map((tag) => <button type="button" data-tag={tag} aria-pressed="false">{tag}</button>)}
+  </div>}
+  {years.length > 0 && <label class="filter-select"><span>{gradeLabel}</span><select data-year><option value="all">全部</option>{years.map((year) => <option value={year}>{year}{gradeLabel === '入学时间' ? '级' : '年'}</option>)}</select></label>}
+  <output data-filter-count aria-live="polite"></output>
+</div>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-filter-root]').forEach((root) => {
+    const scope = root.closest<HTMLElement>('[data-filter-scope]');
+    if (!scope) return;
+    const items = [...scope.querySelectorAll<HTMLElement>('[data-filter-item]')];
+    const buttons = [...root.querySelectorAll<HTMLButtonElement>('[data-tag]')];
+    const select = root.querySelector<HTMLSelectElement>('[data-year]');
+    const output = root.querySelector<HTMLOutputElement>('[data-filter-count]');
+    let tag = 'all';
+    const update = () => {
+      const year = select?.value ?? 'all';
+      let visible = 0;
+      items.forEach((item) => {
+        const tags = (item.dataset.tags ?? '').split('|');
+        const match = (tag === 'all' || tags.includes(tag)) && (year === 'all' || item.dataset.year === year);
+        item.hidden = !match;
+        if (match) visible += 1;
+      });
+      if (output) output.textContent = `${visible} 项`;
+    };
+    buttons.forEach((button) => button.addEventListener('click', () => {
+      tag = button.dataset.tag ?? 'all';
+      buttons.forEach((candidate) => {
+        const active = candidate === button;
+        candidate.classList.toggle('is-active', active);
+        candidate.setAttribute('aria-pressed', String(active));
+      });
+      update();
+    }));
+    select?.addEventListener('change', update);
+    update();
+  });
+</script>

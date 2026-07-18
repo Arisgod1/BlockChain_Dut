@@ -1,7 +1,7 @@
 ---
 import { getCollection, render } from 'astro:content';
 import BaseLayout from '../../../layouts/BaseLayout.astro';
-import { dateText, labels, paths } from '../../../lib/content';
+import { dateText, entryPath, labels, paths, publicDate, referenceKindLabels, withBase } from '../../../lib/content';
 
 export async function getStaticPaths() {
   const entries = await getCollection('generated');
@@ -9,17 +9,28 @@ export async function getStaticPaths() {
 }
 const { entry } = Astro.props;
 const { Content, headings } = await render(entry);
+const allEntries = await getCollection('generated');
+const memberById = new Map(allEntries.filter((item) => item.data.type === 'member' && item.data.status !== 'draft').map((item) => [item.data.id, item]));
+const referenceHref = (url: string) => url.startsWith('/') ? withBase(url) : url;
 ---
 <BaseLayout title={`${entry.data.title}｜区块链组知识库`} description={entry.data.summary}>
   <article class="article-shell" data-pagefind-body>
     <header class="article-header">
-      <div class="article-meta"><span>{labels[entry.data.type]}</span><time datetime={entry.data.updatedAt.toISOString()}>更新于 {dateText(entry.data.updatedAt)}</time>{entry.data.status === 'archived' && <span class="status archived">已归档</span>}</div>
+      <div class="article-meta"><span>{labels[entry.data.type]}</span><time datetime={publicDate(entry).toISOString()}>{entry.data.type === 'meeting' ? '例会时间' : '发布于'} {dateText(publicDate(entry))}</time><span>更新于 {dateText(entry.data.updatedAt)}</span>{entry.data.status === 'archived' && <span class="status archived">已归档</span>}</div>
       <h1 data-pagefind-meta="title">{entry.data.title}</h1><p>{entry.data.summary}</p>
       <div class="tag-row">{entry.data.tags.map((tag) => <span>{tag}</span>)}</div>
+      {entry.data.type === 'meeting' && <div class="detail-links"><strong>主讲人</strong>{entry.data.speakers.map((id) => memberById.get(id)).filter(Boolean).map((member) => <a href={entryPath(member!)}>{member!.data.title}</a>)}</div>}
+      {entry.data.type === 'member' && <div class="member-detail-meta"><span><strong>入学时间</strong>{entry.data.grade} 级</span><span><strong>联系方式</strong>{entry.data.contacts.length ? entry.data.contacts.map((contact) => contact.url ? <a href={contact.url}>{contact.label} · {contact.value}</a> : <span>{contact.label} · {contact.value}</span>) : '暂未公开'}</span></div>}
     </header>
     <div class="article-grid">
-      <aside aria-label="本文目录"><strong>本文目录</strong>{headings.filter((heading) => heading.depth === 2).map((heading) => <a href={`#${heading.slug}`}>{heading.text}</a>)}</aside>
-      <div class="prose"><Content /></div>
+      <aside aria-label="正文内容"><strong>内容</strong>{headings.filter((heading) => heading.depth === 2).map((heading) => <a href={`#${heading.slug}`}>{heading.text}</a>)}</aside>
+      <div class="prose">
+        <Content />
+        {entry.data.references.length > 0 && <section class="reference-section" aria-labelledby="reference-title">
+          <h2 id="reference-title">相关资料</h2>
+          <ul>{entry.data.references.map((reference) => <li><a href={referenceHref(reference.url)}><strong>{reference.title}</strong><span><b>{referenceKindLabels[reference.kind]}</b>来源：{reference.source}</span></a></li>)}</ul>
+        </section>}
+      </div>
     </div>
   </article>
 </BaseLayout>

@@ -1,5 +1,16 @@
 ---
-import BaseLayout from '../../layouts/BaseLayout.astro'; import PageIntro from '../../components/PageIntro.astro'; import EntryList from '../../components/EntryList.astro'; import { publicEntries } from '../../lib/content';
-const entries=(await publicEntries()).filter(e=>e.data.type==='track');
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageIntro from '../../components/PageIntro.astro';
+import EntryList from '../../components/EntryList.astro';
+import FilterBar from '../../components/FilterBar.astro';
+import { publicEntries } from '../../lib/content';
+const entries = (await publicEntries()).filter((entry) => entry.data.type === 'track');
+const tags = [...new Set(entries.flatMap((entry) => entry.data.tags))].sort((a, b) => a.localeCompare(b, 'zh-CN'));
 ---
-<BaseLayout title="技术指导｜区块链组知识库"><PageIntro code="KNOWLEDGE PATHS" title="技术指导" description="按方向组织知识地图、推荐路径、实践项目和相关例会。" /><section class="content-shell section-block"><EntryList entries={entries} empty="尚无已发布的技术方向；格式模板已经准备好。" /></section></BaseLayout>
+<BaseLayout title="技术指导｜区块链组知识库">
+  <PageIntro code="KNOWLEDGE PATHS" title="技术指导" description="汇集组内知识，开放给想要深度学习技术，接触前沿知识的友友。" />
+  <section class="content-shell collection-panel" data-filter-scope>
+    <FilterBar tags={tags} />
+    <EntryList entries={entries} empty="尚无已发布的技术方向；格式模板已经准备好。" />
+  </section>
+</BaseLayout>

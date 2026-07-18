@@ -13,6 +13,7 @@ publishedAt: 2026-07-17
 updatedAt: 2026-07-17
 cover: null
 media: []
+references: []
 ---
 
 ## 背景
@@ -24,5 +25,3 @@ media: []
 ## 成果
 
 ## 复现或使用方式
-
-## 相关资料

@@ -12,6 +12,14 @@ export const mediaSchema = z.object({
   creator: z.string().optional(),
 });
 
+export const referenceKinds = ['article', 'project', 'meeting', 'guide', 'document', 'video', 'website', 'dataset', 'other'] as const;
+export const referenceSchema = z.object({
+  kind: z.enum(referenceKinds),
+  title: z.string().min(1).max(160),
+  url: z.string().refine((value) => value.startsWith('/') || /^https?:\/\//.test(value), 'must be an internal path or HTTP(S) URL'),
+  source: z.string().min(1).max(120),
+}).strict();
+
 const common = z.object({
   schemaVersion: z.literal(1),
   id: z.string().regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/),
@@ -21,19 +29,27 @@ const common = z.object({
   status: z.enum(statuses),
   authors: z.array(z.string().regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/)).min(1),
   tags: z.array(z.string().min(1)).min(1).max(8),
-  publishedAt: z.coerce.date(),
   updatedAt: z.coerce.date(),
   cover: z.string().startsWith('/assets/').nullable(),
   media: z.array(mediaSchema),
-});
+  references: z.array(referenceSchema).max(24),
+}).strict();
+
+const publishable = common.extend({ publishedAt: z.coerce.date() });
+
+export const contactSchema = z.object({
+  label: z.string().min(1).max(24),
+  value: z.string().min(1).max(120),
+  url: z.string().url().optional(),
+}).strict();
 
 export const contentSchema = z.discriminatedUnion('type', [
   common.extend({ type: z.literal('meeting'), speakers: z.array(z.string()).min(1), heldAt: z.coerce.date() }),
-  common.extend({ type: z.literal('group') }),
-  common.extend({ type: z.literal('track') }),
-  common.extend({ type: z.literal('project') }),
-  common.extend({ type: z.literal('member') }),
-  common.extend({ type: z.literal('recruitment') }),
+  publishable.extend({ type: z.literal('group') }),
+  publishable.extend({ type: z.literal('track') }),
+  publishable.extend({ type: z.literal('project') }),
+  publishable.extend({ type: z.literal('member'), grade: z.string().regex(/^\d{2}$/), contacts: z.array(contactSchema).max(6) }),
+  publishable.extend({ type: z.literal('recruitment') }),
 ]);
 
 export type ContentFrontmatter = z.infer<typeof contentSchema>;
