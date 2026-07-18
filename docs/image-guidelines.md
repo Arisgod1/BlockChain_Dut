@@ -10,8 +10,6 @@ knowledge/assets/
 │   ├── brand/
 │   ├── photos/
 │   └── contact/
-│   ├── brand/                         Logo、招牌、加入图标
-│   └── photos/                        首页合影等少量长期全站照片
 ├── covers/
 │   └── <group|tracks|meetings|projects|members|recruitment>/<entry-id>/cover.ext
 ├── inline/
@@ -27,7 +25,23 @@ knowledge/assets/
 
 完整活动原片、RAW、PSD、工程文件和未采用照片保存在外部归档，不进入 Git。不要把图片放在仓库根目录、`site/src/`、`site/public/generated/` 或 `generated/`。
 
-## 2. 如何选择目录
+## 2. 直接引用外部 URL
+
+正文允许直接使用公开、稳定的 HTTPS 图片 URL：
+
+```markdown
+![图片中对理解正文有用的信息](https://example.org/path/image.png)
+
+> 图片来源：来源组织或作者；授权：明确的许可说明。
+```
+
+- URL 必须不需登录即可访问，不得包含 token、临时签名、Cookie 或其他密密参数。
+- 必须确认原站允许外链展示，并在图片附近注明真实来源和授权状态。
+- Markdown alt 文本仍然必填；图片不得承担正文的唯一信息。
+- 外部图片不写入 `media`，也不会被生成器去 EXIF、压缩、转码或保存。
+- 外部服务不可用时，网站将无法显示该图。对长期重要的图片，应在获得授权后优先收录到 `knowledge/assets/`。
+
+## 3. 如何选择目录
 
 | 场景 | 放置位置 | 示例 |
 | --- | --- | --- |
@@ -42,7 +56,7 @@ knowledge/assets/
 
 判断顺序：只被一篇内容使用就放该内容的 `covers/` 或 `inline/`；确实被多篇内容复用才放 `events/`；只有全站长期使用才放 `site/`。
 
-## 3. 命名
+## 4. 命名
 
 - 目录和文件只用小写英文、数字和连字符，不使用中文、空格或下划线。
 - `entry-id` 必须等于引用文档 Frontmatter 的 `id`。
@@ -51,7 +65,7 @@ knowledge/assets/
 - 名称描述图片内容，不写 `final`、`new`、`v2`、`big` 等临时状态。
 - 不把输出尺寸写入源文件名；响应式尺寸由生成器命名。
 
-## 4. 体积、尺寸与格式
+## 5. 体积、尺寸与格式
 
 | 用途 | 比例 | 源文件建议 | 单个源文件上限 |
 | --- | --- | --- | --- |
@@ -66,7 +80,7 @@ knowledge/assets/
 - 单篇内容建议最多 12 张图片、源文件合计不超过 20MB；超过时拆分内容或使用外部相册。
 - 删除工作区图片不会缩小 Git 历史。大批量导入前必须先筛选、压缩，再一次性提交。
 
-## 5. Frontmatter 登记
+## 6. Frontmatter 登记
 
 封面通过 `cover` 登记：
 
@@ -74,7 +88,7 @@ knowledge/assets/
 cover: /assets/covers/tracks/go-getting-started/cover.jpg
 ```
 
-正文图片必须在 `media` 中逐张登记：
+收录到仓库的正文图片必须在 `media` 中逐张登记：
 
 ```yaml
 media:
@@ -94,7 +108,7 @@ media:
 
 正文使用的路径必须与 `media.path` 完全一致。来源不明、未获授权或缺少必要元数据的图片禁止发布。
 
-## 6. 新增流程
+## 7. 新增流程
 
 1. 先决定图片归属于哪份内容；得到稳定 `entry-id` 后再创建图片目录。
 2. 确认图片可公开，不含密钥、私人联系方式或未授权人脸。
@@ -104,7 +118,7 @@ media:
 6. 运行 `pnpm site-maintainer check`。
 7. 在桌面和移动 Preview 中检查裁切、清晰度和说明文字。
 
-## 7. 现有全站素材
+## 8. 现有全站素材
 
 | 规范路径 | 用途 |
 | --- | --- |
