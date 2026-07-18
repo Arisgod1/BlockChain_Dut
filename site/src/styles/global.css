@@ -52,3 +52,4 @@ button,input { font: inherit; }
 .member-grid { grid-template-columns:repeat(auto-fill,minmax(14rem,18rem)); }
 @media (max-width: 800px) { .group-intro picture { max-height:none; } }
 .member-avatar { width:4.5rem; height:4.5rem; margin:.75rem 0 .5rem; border:1px solid var(--line); border-radius:50%; background:var(--surface); object-fit:cover; }
+.qq-group-qr { height:auto; }

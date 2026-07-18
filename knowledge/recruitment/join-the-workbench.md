@@ -2,7 +2,7 @@
 schemaVersion: 1
 id: join-the-workbench
 title: 参与知识库维护
-summary: 用于验证“组内动态”页面的 mock 信息，说明可以参与的工作，但不提供虚构联系方式。
+summary: 说明如何加入区块链组、参与知识库维护，并提供当前公开的 QQ 群和联系邮箱。
 type: recruitment
 status: published
 authors:
