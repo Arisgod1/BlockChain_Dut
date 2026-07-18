@@ -27,7 +27,7 @@ test('content filters and meeting speakers are linked', async ({ page }) => {
 
   await page.goto('./meetings/');
   await expect(page.getByRole('combobox', { name: '例会时间' })).toBeVisible();
-  await expect(page.getByRole('link', { name: '唐明迪', exact: true })).toHaveAttribute('href', /members\/tang-mingdi/);
+  await expect(page.locator('.entry-speakers a[href$="/members/tang-mingdi/"]')).toHaveCount(2);
 });
 
 test('member cards expose grade and detail affordance', async ({ page }) => {
