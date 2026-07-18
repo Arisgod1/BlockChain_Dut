@@ -88,8 +88,8 @@ async function processAssets(items: ParsedContent[], outputRoot: string) {
   if (existsSync(sign)) await (await removeConnectedWhite(sign)).trim().resize(1000, 1000, { fit: 'inside', withoutEnlargement: true }).png({ compressionLevel: 9 }).toFile(resolve(outputRoot, 'assets/site/blockchain-group-sign.png'));
   const photo = resolve(root, 'knowledge/assets/site/photos/group-photo-original.jpg');
   if (existsSync(photo)) {
-    await sharp(photo).rotate().resize(1600, 1067, { fit: 'cover' }).webp({ quality: 78 }).toFile(resolve(outputRoot, 'assets/site/group-photo-1600.webp'));
-    await sharp(photo).rotate().resize(800, 533, { fit: 'cover' }).webp({ quality: 78 }).toFile(resolve(outputRoot, 'assets/site/group-photo-800.webp'));
+    await sharp(photo).rotate().resize({ width: 1600, withoutEnlargement: true }).webp({ quality: 78 }).toFile(resolve(outputRoot, 'assets/site/group-photo-1600.webp'));
+    await sharp(photo).rotate().resize({ width: 800, withoutEnlargement: true }).webp({ quality: 78 }).toFile(resolve(outputRoot, 'assets/site/group-photo-800.webp'));
   }
   for (const path of paths) {
     const source = resolve(root, 'knowledge', path.replace(/^\//, ''));

@@ -107,6 +107,6 @@ media:
 | --- | --- |
 | `assets/site/brand/blockchain-group-sign.png` | 页头和组内动态使用的正式招牌 |
 | `assets/site/brand/recruitment-mark.png` | 组内动态加入入口图标 |
-| `assets/site/photos/group-photo-original.jpg` | 首页合影源文件；生成时去 EXIF并输出响应式 WebP |
+| `assets/site/photos/group-photo-original.jpg` | 首页合影源文件；保留约 4:3 完整画面，生成时去 EXIF并输出响应式 WebP |
 
 发布层位于 `site/public/generated/`，由生成器覆盖。内容作者不得手工修改或把生成图复制回事实源。
