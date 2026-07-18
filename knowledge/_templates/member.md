@@ -10,6 +10,7 @@ authors:
 tags:
   - 成员
 grade: "23"
+avatarUrl: https://github.com/public-account.png
 contacts: []
 publishedAt: 2026-07-17
 updatedAt: 2026-07-17

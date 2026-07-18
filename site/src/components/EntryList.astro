@@ -7,7 +7,7 @@ const memberById = new Map(members.map((entry) => [entry.data.id, entry]));
 {entries.length ? (
   <ol class="entry-list">
     {entries.map((entry) => (
-      <li data-filter-item data-tags={entry.data.tags.join('|')} data-year={String(publicDate(entry).getFullYear())} data-search-text={`${entry.data.title} ${entry.data.summary} ${entry.data.tags.join(' ')}`}>
+      <li data-filter-item data-tags={entry.data.tags.join('|')} data-year={String(publicDate(entry).getFullYear())} data-timestamp={String(publicDate(entry).getTime())} data-search-text={`${entry.data.title} ${entry.data.summary} ${entry.data.tags.join(' ')} ${entry.data.type === 'meeting' ? entry.data.speakers.map((id) => memberById.get(id)?.data.title ?? '').join(' ') : ''}`}>
         <a class="entry-link" href={entryPath(entry)}>
           <span class="entry-main"><strong>{entry.data.title}</strong><span>{entry.data.summary}</span></span>
           <span class="entry-meta">

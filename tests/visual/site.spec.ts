@@ -37,6 +37,12 @@ test('member cards expose grade and detail affordance', async ({ page }) => {
   await expect(page.getByRole('button', { name: '老师', exact: true })).toBeVisible();
   await expect(page.getByRole('button', { name: '组员', exact: true })).toBeVisible();
   await expect(page.getByRole('group', { name: '技术标签筛选' })).toBeVisible();
+  const goTag = page.getByRole('button', { name: 'Go', exact: true });
+  const backendTag = page.getByRole('button', { name: '后端', exact: true });
+  await goTag.click();
+  await backendTag.click();
+  await expect(goTag).toHaveAttribute('aria-pressed', 'true');
+  await expect(backendTag).toHaveAttribute('aria-pressed', 'true');
   const card = page.getByRole('link', { name: '查看唐明迪的成员资料' });
   await expect(card).toBeVisible();
   await expect(card).toContainText('23 级');
@@ -44,6 +50,18 @@ test('member cards expose grade and detail affordance', async ({ page }) => {
   await page.getByRole('searchbox', { name: '成员搜索' }).fill('Flutter');
   await expect(page.locator('[data-filter-count]')).toContainText('1 项');
   await expect(page.getByRole('link', { name: '查看王明富的成员资料' })).toBeVisible();
+});
+
+test('meeting search and time ordering work together', async ({ page }) => {
+  await page.goto('./meetings/');
+  const search = page.getByRole('searchbox', { name: '例会搜索' });
+  await search.fill('RAG');
+  await expect(page.locator('[data-filter-count]')).toContainText('1 项');
+  await search.fill('');
+  await page.getByRole('combobox', { name: '时间排序' }).selectOption('asc');
+  await expect(page.locator('.entry-list > li').first()).toContainText('第一次例会：Git 版本控制与见面会');
+  await page.getByRole('combobox', { name: '时间排序' }).selectOption('desc');
+  await expect(page.locator('.entry-list > li').first()).toContainText('AI 工作流搭建');
 });
 
 test('track search composes with technical tags', async ({ page }) => {

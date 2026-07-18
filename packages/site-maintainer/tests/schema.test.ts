@@ -18,5 +18,6 @@ describe('content schema', () => {
     expect(contentSchema.parse({ ...projectBase, type: 'project', createdAt: '2026-07-17T21:00:29+08:00' }).type).toBe('project');
   });
   it('requires member grade and contacts', () => expect(() => contentSchema.parse({ ...base, type: 'member' })).toThrow());
+  it('accepts a GitHub-backed member avatar', () => expect(contentSchema.safeParse({ ...base, type: 'member', grade: '23', avatarUrl: 'https://github.com/public-account.png', contacts: [] }).success).toBe(true));
   it('requires a type and source for every reference', () => expect(() => contentSchema.parse({ ...base, references: [{ title: '资料', url: '/example/' }] })).toThrow());
 });

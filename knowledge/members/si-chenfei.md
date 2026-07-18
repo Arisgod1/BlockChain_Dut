@@ -8,6 +8,7 @@ status: published
 authors: [si-chenfei]
 tags: [成员, 算法, C++, 机器学习, 前端, 后端]
 grade: "24"
+avatarUrl: https://github.com/stars569.png
 contacts:
   - label: GitHub
     value: stars569
@@ -15,11 +16,7 @@ contacts:
 publishedAt: 2026-07-18
 updatedAt: 2026-07-18
 cover: null
-media:
-  - path: /assets/avatars/si-chenfei/avatar.png
-    alt: 司辰飞的公开头像
-    source: 原区块链组网站公开成员资料
-    rights: permission-granted
+media: []
 references: []
 ---
 
@@ -32,4 +29,3 @@ references: []
 - C++ 算法
 - React、Node.js、PostgreSQL
 - 机器学习入门
-

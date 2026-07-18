@@ -48,7 +48,7 @@ export const contentSchema = z.discriminatedUnion('type', [
   publishable.extend({ type: z.literal('group') }),
   publishable.extend({ type: z.literal('track') }),
   common.extend({ type: z.literal('project'), createdAt: z.coerce.date() }),
-  publishable.extend({ type: z.literal('member'), grade: z.string().regex(/^\d{2}$/), contacts: z.array(contactSchema).max(6) }),
+  publishable.extend({ type: z.literal('member'), grade: z.string().regex(/^\d{2}$/), avatarUrl: z.string().url(), contacts: z.array(contactSchema).max(6) }),
   publishable.extend({ type: z.literal('recruitment'), contactEmail: z.string().email(), qqGroupNumber: z.string().regex(/^\d{5,14}$/) }),
 ]);
 

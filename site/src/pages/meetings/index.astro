@@ -8,11 +8,12 @@ const all = await publicEntries();
 const entries = all.filter((entry) => entry.data.type === 'meeting');
 const members = all.filter((entry) => entry.data.type === 'member');
 const years = [...new Set(entries.map((entry) => String(entry.data.type === 'meeting' && entry.data.heldAt.getFullYear())))].sort().reverse();
+const tags = [...new Set(entries.flatMap((entry) => entry.data.tags))].sort((a, b) => a.localeCompare(b, 'zh-CN'));
 ---
 <BaseLayout title="例会｜区块链组知识库">
   <PageIntro code="MEETING LOG" title="例会" description="归档各次例会，可以查看每次例会的详情。" />
   <section class="content-shell collection-panel" data-filter-scope>
-    <FilterBar years={years} gradeLabel="例会时间" />
+    <FilterBar tags={tags} years={years} gradeLabel="例会时间" searchable searchLabel="例会搜索" searchPlaceholder="搜索主题、摘要、主讲人或标签" sortable />
     <EntryList entries={entries} members={members} empty="尚无已发布的例会记录。" />
   </section>
 </BaseLayout>

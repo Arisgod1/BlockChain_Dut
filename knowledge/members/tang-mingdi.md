@@ -8,6 +8,7 @@ status: published
 authors: [tang-mingdi]
 tags: [组长, 后端, Go, Agent]
 grade: "23"
+avatarUrl: https://github.com/Arisgod1.png
 contacts:
   - label: GitHub
     value: Arisgod1
@@ -15,11 +16,7 @@ contacts:
 publishedAt: 2026-07-18
 updatedAt: 2026-07-18
 cover: null
-media:
-  - path: /assets/avatars/tang-mingdi/avatar.png
-    alt: 唐明迪的公开头像
-    source: 原区块链组网站公开成员资料
-    rights: permission-granted
+media: []
 references: []
 ---
 
@@ -31,4 +28,3 @@ references: []
 
 - Java、Go 后端
 - Agent 工作流编排
-

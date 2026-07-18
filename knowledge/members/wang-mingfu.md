@@ -8,6 +8,7 @@ status: published
 authors: [wang-mingfu]
 tags: [成员, Flutter, 前端]
 grade: "24"
+avatarUrl: https://github.com/MF33006.png
 contacts:
   - label: GitHub
     value: MF33006
@@ -15,11 +16,7 @@ contacts:
 publishedAt: 2026-07-18
 updatedAt: 2026-07-18
 cover: null
-media:
-  - path: /assets/avatars/wang-mingfu/avatar.png
-    alt: 王明富的公开头像
-    source: 原区块链组网站公开成员资料
-    rights: permission-granted
+media: []
 references: []
 ---
 
@@ -30,4 +27,3 @@ references: []
 ## 参与方向
 
 - Flutter 前端
-

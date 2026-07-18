@@ -16,14 +16,13 @@ knowledge/assets/
 │   └── <group|tracks|meetings|projects|members|recruitment>/<entry-id>/cover.ext
 ├── inline/
 │   └── <group|tracks|meetings|projects|members|recruitment>/<entry-id>/NN-subject.ext
-├── avatars/<member-id>/avatar.ext
 └── events/<yyyy>/<event-id>/NN-subject.ext
 ```
 
 - `site/`：仅放跨全站长期使用的少量素材；`brand/` 放品牌标识，`photos/` 放站点级合影，`contact/` 放公开群二维码或联系卡片，不能当普通图片仓库。
 - `covers/`：一份内容一个 ID 目录，主封面固定命名为 `cover.ext`。
 - `inline/`：正文专用图片，目录必须与引用文档的类型和 ID 对应。
-- `avatars/`：一个成员一个目录，只放本人确认公开的头像。
+- 成员头像不进入图片目录，直接由成员文档的 GitHub `avatarUrl` 提供。
 - `events/`：同一活动被多篇内容复用时使用；年份为四位数，活动 ID 使用英文连字符。
 
 完整活动原片、RAW、PSD、工程文件和未采用照片保存在外部归档，不进入 Git。不要把图片放在仓库根目录、`site/src/`、`site/public/generated/` 或 `generated/`。
@@ -37,7 +36,7 @@ knowledge/assets/
 | 技术指导封面 | `covers/tracks/<entry-id>/cover.jpg` | `covers/tracks/go-getting-started/cover.jpg` |
 | 例会正文截图 | `inline/meetings/<entry-id>/NN-subject.png` | `inline/meetings/git-version-control-meeting/01-command-demo.png` |
 | 项目架构图 | `inline/projects/<entry-id>/NN-subject.png` | `inline/projects/blockchain-dut-knowledge-base/01-architecture.png` |
-| 成员头像 | `avatars/<member-id>/avatar.jpg` | `avatars/member-public-id/avatar.jpg` |
+| 成员头像 | 不保存静态图片 | `avatarUrl: https://github.com/public-account.png` |
 | 多篇文档共用的活动照片 | `events/<yyyy>/<event-id>/NN-subject.jpg` | `events/2026/summer-workshop/01-group-photo.jpg` |
 | 公开联系二维码 | `site/contact/<channel>-qr.png` | `site/contact/qq-group-qr.png` |
 

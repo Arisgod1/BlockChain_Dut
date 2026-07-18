@@ -8,6 +8,7 @@ status: published
 authors: [zhao-shuyang]
 tags: [成员, Vue, TypeScript, 前端, Agent]
 grade: "24"
+avatarUrl: https://github.com/qin-net.png
 contacts:
   - label: GitHub
     value: qin-net
@@ -15,11 +16,7 @@ contacts:
 publishedAt: 2026-07-18
 updatedAt: 2026-07-18
 cover: null
-media:
-  - path: /assets/avatars/zhao-shuyang/avatar.png
-    alt: 赵舒阳的公开头像
-    source: 原区块链组网站公开成员资料
-    rights: permission-granted
+media: []
 references: []
 ---
 
@@ -31,4 +28,3 @@ references: []
 
 - Vue、TypeScript、Vite
 - 大前端与 Agent 开发
-

@@ -8,6 +8,7 @@ status: published
 authors: [wang-yida]
 tags: [成员, 游戏开发, GDScript, Blender]
 grade: "24"
+avatarUrl: https://github.com/ksyou233.png
 contacts:
   - label: GitHub
     value: ksyou233
@@ -15,11 +16,7 @@ contacts:
 publishedAt: 2026-07-18
 updatedAt: 2026-07-18
 cover: null
-media:
-  - path: /assets/avatars/wang-yida/avatar.png
-    alt: 王毅达的公开头像
-    source: 原区块链组网站公开成员资料
-    rights: permission-granted
+media: []
 references: []
 ---
 
@@ -31,4 +28,3 @@ references: []
 
 - GDScript
 - Blender
-

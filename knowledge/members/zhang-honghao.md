@@ -8,6 +8,7 @@ status: published
 authors: [zhang-honghao]
 tags: [成员, Java, 中间件, 脚本, 插件]
 grade: "24"
+avatarUrl: https://github.com/zhh293.png
 contacts:
   - label: GitHub
     value: zhh293
@@ -15,11 +16,7 @@ contacts:
 publishedAt: 2026-07-18
 updatedAt: 2026-07-18
 cover: null
-media:
-  - path: /assets/avatars/zhang-honghao/avatar.png
-    alt: 张鸿昊的公开头像
-    source: 原区块链组网站公开成员资料
-    rights: permission-granted
+media: []
 references: []
 ---
 
@@ -31,4 +28,3 @@ references: []
 
 - Java 与中间件
 - 脚本和插件开发
-

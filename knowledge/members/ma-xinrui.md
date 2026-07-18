@@ -8,6 +8,7 @@ status: published
 authors: [ma-xinrui]
 tags: [成员, Diffusion, 图像处理, 前端]
 grade: "24"
+avatarUrl: https://github.com/IHIRINA.png
 contacts:
   - label: GitHub
     value: IHIRINA
@@ -15,11 +16,7 @@ contacts:
 publishedAt: 2026-07-18
 updatedAt: 2026-07-18
 cover: null
-media:
-  - path: /assets/avatars/ma-xinrui/avatar.png
-    alt: 马鑫蕊的公开头像
-    source: 原区块链组网站公开成员资料
-    rights: permission-granted
+media: []
 references: []
 ---
 
@@ -31,4 +28,3 @@ references: []
 
 - Diffusion 图像处理
 - 前端开发
-

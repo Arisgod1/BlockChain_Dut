@@ -181,7 +181,7 @@ pnpm site-maintainer publish
 | 首页合影等长期照片 | `knowledge/assets/site/photos/` |
 | 内容封面 | `knowledge/assets/covers/<type>/<entry-id>/cover.ext` |
 | 正文截图、图表和照片 | `knowledge/assets/inline/<type>/<entry-id>/NN-subject.ext` |
-| 经本人授权的成员头像 | `knowledge/assets/avatars/<member-id>/avatar.ext` |
+| 成员头像 | 直接使用成员文档中的公开 GitHub `avatarUrl`，不保存静态副本 |
 | 多篇内容共用的活动精选图 | `knowledge/assets/events/<yyyy>/<event-id>/NN-subject.ext` |
 | 全站公开联系方式图片 | `knowledge/assets/site/contact/<channel>-qr.ext` |
 
