@@ -9,13 +9,15 @@ const entries = (await publicEntries()).filter((entry) => entry.data.type === 'm
   if (a.data.type !== 'member' || b.data.type !== 'member') return 0;
   return priority(a.data.tags) - priority(b.data.tags) || Number(a.data.grade) - Number(b.data.grade) || a.data.title.localeCompare(b.data.title, 'zh-CN');
 });
-const tags = [...new Set(entries.flatMap((entry) => entry.data.tags))].sort((a, b) => a.localeCompare(b, 'zh-CN'));
+const identityTags = ['组长', '老师', '成员'];
+const roles = ['组长', '老师', '组员'];
+const tags = [...new Set(entries.flatMap((entry) => entry.data.tags.filter((tag) => !identityTags.includes(tag))))].sort((a, b) => a.localeCompare(b, 'zh-CN'));
 const grades = [...new Set(entries.map((entry) => entry.data.type === 'member' ? entry.data.grade : ''))].filter(Boolean).sort();
 ---
 <BaseLayout title="成员｜区块链组知识库">
   <PageIntro code="PUBLIC MEMBERS" title="成员" description="这里是区块链组的成员，大家可以看看👀" />
   <section class="content-shell member-panel" data-filter-scope>
-    <FilterBar tags={tags} years={grades} gradeLabel="入学时间" />
+    <FilterBar roles={roles} tags={tags} years={grades} gradeLabel="入学时间" searchable searchLabel="成员搜索" searchPlaceholder="搜索姓名或技术标签" />
     {entries.length ? <MemberCards entries={entries} /> : <div class="empty-state"><strong>等待成员公开资料</strong><p>这里只展示本人确认公开的信息。</p></div>}
   </section>
 </BaseLayout>

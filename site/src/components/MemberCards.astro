@@ -4,16 +4,19 @@ import { entryPath } from '../lib/content';
 const { entries } = Astro.props as { entries: KnowledgeEntry[] };
 ---
 <ol class="member-grid">
-  {entries.map((entry) => entry.data.type === 'member' && (
-    <li data-filter-item data-tags={entry.data.tags.join('|')} data-year={entry.data.grade}>
+  {entries.map((entry) => entry.data.type === 'member' && (() => {
+    const sourceRole = entry.data.tags.find((tag) => ['组长', '老师', '成员'].includes(tag)) ?? '成员';
+    const role = sourceRole === '成员' ? '组员' : sourceRole;
+    const technicalTags = entry.data.tags.filter((tag) => !['组长', '老师', '成员'].includes(tag));
+    return <li data-filter-item data-role={role} data-tags={technicalTags.join('|')} data-year={entry.data.grade} data-search-text={`${entry.data.title} ${entry.data.summary} ${technicalTags.join(' ')}`}>
       <a class="member-card" href={entryPath(entry)} aria-label={`查看${entry.data.title}的成员资料`}>
         <span class="member-card-inner">
           <span class="member-card-face member-card-front">
             {entry.data.media[0] && <img class="member-avatar" src={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/generated${entry.data.media[0].path}`} alt="" width="600" height="600" />}
-            <span class="member-role">{entry.data.tags.find((tag) => ['组长', '老师', '成员'].includes(tag)) ?? '成员'}</span>
+            <span class={`member-role role-${role}`}>{role}</span>
             <strong>{entry.data.title}</strong>
             <span class="member-grade">{entry.data.grade} 级</span>
-            <span class="member-tags">{entry.data.tags.filter((tag) => !['组长', '老师', '成员'].includes(tag)).slice(0, 3).join(' · ') || '公开成员资料'}</span>
+            <span class="member-tags">{technicalTags.slice(0, 3).join(' · ') || '公开成员资料'}</span>
             <small>悬停查看简介</small>
           </span>
           <span class="member-card-face member-card-back">
@@ -24,6 +27,6 @@ const { entries } = Astro.props as { entries: KnowledgeEntry[] };
           </span>
         </span>
       </a>
-    </li>
-  ))}
+    </li>;
+  })())}
 </ol>

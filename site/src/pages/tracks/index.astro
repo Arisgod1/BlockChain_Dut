@@ -10,7 +10,7 @@ const tags = [...new Set(entries.flatMap((entry) => entry.data.tags))].sort((a, 
 <BaseLayout title="技术指导｜区块链组知识库">
   <PageIntro code="KNOWLEDGE PATHS" title="技术指导" description="汇集组内知识，开放给想要深度学习技术，接触前沿知识的友友。" />
   <section class="content-shell collection-panel" data-filter-scope>
-    <FilterBar tags={tags} />
+    <FilterBar tags={tags} searchable searchLabel="内容搜索" searchPlaceholder="搜索标题、摘要或技术标签" />
     <EntryList entries={entries} empty="尚无已发布的技术方向；格式模板已经准备好。" />
   </section>
 </BaseLayout>

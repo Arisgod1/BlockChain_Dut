@@ -1,11 +1,17 @@
 ---
-const { tags = [], years = [], gradeLabel = '时间' } = Astro.props as { tags?: string[]; years?: string[]; gradeLabel?: string };
+const { tags = [], roles = [], years = [], gradeLabel = '时间', searchable = false, searchLabel = '搜索', searchPlaceholder = '搜索标题、摘要或标签' } = Astro.props as { tags?: string[]; roles?: string[]; years?: string[]; gradeLabel?: string; searchable?: boolean; searchLabel?: string; searchPlaceholder?: string };
 ---
 <div class="content-filter" data-filter-root>
-  {tags.length > 0 && <div class="filter-group" aria-label="标签筛选">
-    <span>标签</span>
-    <button type="button" class="is-active" data-tag="all" aria-pressed="true">全部</button>
-    {tags.map((tag) => <button type="button" data-tag={tag} aria-pressed="false">{tag}</button>)}
+  {searchable && <label class="filter-search"><span>{searchLabel}</span><input type="search" data-query placeholder={searchPlaceholder} autocomplete="off" /></label>}
+  {roles.length > 0 && <div class="filter-group identity-filter" role="group" aria-label="身份筛选">
+    <span>身份</span>
+    <button type="button" class="is-active" data-filter-kind="role" data-value="all" aria-pressed="true">全部</button>
+    {roles.map((role) => <button type="button" class={`role-${role}`} data-filter-kind="role" data-value={role} aria-pressed="false">{role}</button>)}
+  </div>}
+  {tags.length > 0 && <div class="filter-group" role="group" aria-label="技术标签筛选">
+    <span>技术标签</span>
+    <button type="button" class="is-active" data-filter-kind="tag" data-value="all" aria-pressed="true">全部</button>
+    {tags.map((tag) => <button type="button" data-filter-kind="tag" data-value={tag} aria-pressed="false">{tag}</button>)}
   </div>}
   {years.length > 0 && <label class="filter-select"><span>{gradeLabel}</span><select data-year><option value="all">全部</option>{years.map((year) => <option value={year}>{year}{gradeLabel === '入学时间' ? '级' : '年'}</option>)}</select></label>}
   <output data-filter-count aria-live="polite"></output>
@@ -16,24 +22,30 @@ const { tags = [], years = [], gradeLabel = '时间' } = Astro.props as { tags?:
     const scope = root.closest<HTMLElement>('[data-filter-scope]');
     if (!scope) return;
     const items = [...scope.querySelectorAll<HTMLElement>('[data-filter-item]')];
-    const buttons = [...root.querySelectorAll<HTMLButtonElement>('[data-tag]')];
+    const buttons = [...root.querySelectorAll<HTMLButtonElement>('[data-filter-kind]')];
     const select = root.querySelector<HTMLSelectElement>('[data-year]');
+    const queryInput = root.querySelector<HTMLInputElement>('[data-query]');
     const output = root.querySelector<HTMLOutputElement>('[data-filter-count]');
     let tag = 'all';
+    let role = 'all';
     const update = () => {
       const year = select?.value ?? 'all';
+      const query = queryInput?.value.trim().toLocaleLowerCase('zh-CN') ?? '';
       let visible = 0;
       items.forEach((item) => {
         const tags = (item.dataset.tags ?? '').split('|');
-        const match = (tag === 'all' || tags.includes(tag)) && (year === 'all' || item.dataset.year === year);
+        const searchText = (item.dataset.searchText ?? item.textContent ?? '').toLocaleLowerCase('zh-CN');
+        const match = (tag === 'all' || tags.includes(tag)) && (role === 'all' || item.dataset.role === role) && (year === 'all' || item.dataset.year === year) && (!query || searchText.includes(query));
         item.hidden = !match;
         if (match) visible += 1;
       });
       if (output) output.textContent = `${visible} 项`;
     };
     buttons.forEach((button) => button.addEventListener('click', () => {
-      tag = button.dataset.tag ?? 'all';
-      buttons.forEach((candidate) => {
+      const kind = button.dataset.filterKind;
+      if (kind === 'role') role = button.dataset.value ?? 'all';
+      if (kind === 'tag') tag = button.dataset.value ?? 'all';
+      buttons.filter((candidate) => candidate.dataset.filterKind === kind).forEach((candidate) => {
         const active = candidate === button;
         candidate.classList.toggle('is-active', active);
         candidate.setAttribute('aria-pressed', String(active));
@@ -41,6 +53,7 @@ const { tags = [], years = [], gradeLabel = '时间' } = Astro.props as { tags?:
       update();
     }));
     select?.addEventListener('change', update);
+    queryInput?.addEventListener('input', update);
     update();
   });
 </script>

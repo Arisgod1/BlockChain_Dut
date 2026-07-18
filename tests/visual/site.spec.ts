@@ -33,10 +33,24 @@ test('content filters and meeting speakers are linked', async ({ page }) => {
 test('member cards expose grade and detail affordance', async ({ page }) => {
   await page.goto('./members/');
   await expect(page.getByRole('combobox', { name: '入学时间' })).toBeVisible();
+  await expect(page.getByRole('group', { name: '身份筛选' })).toBeVisible();
+  await expect(page.getByRole('button', { name: '老师', exact: true })).toBeVisible();
+  await expect(page.getByRole('button', { name: '组员', exact: true })).toBeVisible();
+  await expect(page.getByRole('group', { name: '技术标签筛选' })).toBeVisible();
   const card = page.getByRole('link', { name: '查看唐明迪的成员资料' });
   await expect(card).toBeVisible();
   await expect(card).toContainText('23 级');
   await expect(card).toContainText('GitHub · Arisgod1');
+  await page.getByRole('searchbox', { name: '成员搜索' }).fill('Flutter');
+  await expect(page.locator('[data-filter-count]')).toContainText('1 项');
+  await expect(page.getByRole('link', { name: '查看王明富的成员资料' })).toBeVisible();
+});
+
+test('track search composes with technical tags', async ({ page }) => {
+  await page.goto('./tracks/');
+  await page.getByRole('searchbox', { name: '内容搜索' }).fill('HTTP');
+  await expect(page.locator('[data-filter-count]')).toContainText('1 项');
+  await expect(page.getByRole('link', { name: 'Go 入门' })).toBeVisible();
 });
 
 test('related references expose type and source', async ({ page }) => {
