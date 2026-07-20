@@ -1,9 +1,9 @@
 # Site update report
 
-Source commit: `965aad4569f57bd0ecc74976a0218a1f310d352c`
+Source commit: `6f9868b0f4be02eaa20c56554f665d331f3ba56d`
 Generator: `1.0.0`
 
-- Added: none
+- Added: cheng-xiang
 - Changed: none
 - Deleted: none
 
