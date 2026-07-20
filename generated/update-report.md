@@ -1,9 +1,9 @@
 # Site update report
 
-Source commit: `817f6f5145a703d8ef1c93e3a40ffd19d247ce04`
+Source commit: `def409a2606ffcbe824614e852b539b7feaa8fc3`
 Generator: `1.0.0`
 
-- Added: lei-yu, lu-zhichang
+- Added: ding-jiayuan
 - Changed: none
 - Deleted: none
 
