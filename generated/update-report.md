@@ -1,10 +1,10 @@
 # Site update report
 
-Source commit: `d733453d0557354af6b965682ba1a9d1db3b3967`
+Source commit: `c8c2e00de6455c7a5f0e5ca7c87a7654eff11970`
 Generator: `1.0.0`
 
 - Added: none
-- Changed: none
+- Changed: tang-mingdi
 - Deleted: none
 
 Run `pnpm site-maintainer preview` and inspect all affected routes before publishing.
