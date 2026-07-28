@@ -6,7 +6,7 @@ summary: 区块链组成员，关注Go，现在还在学习阶段。
 type: member
 status: published
 authors: [wang-ziheng]
-tags: [成员]
+tags: [成员，Go]
 grade: "25"
 avatarUrl: https://avatars.githubusercontent.com/CurryHeng?size=192
 contacts:
