@@ -6,7 +6,7 @@ summary: 区块链组成员，主要关注深度学习，目前正在深入学�
 type: member
 status: published
 authors: [zhu-xingxu]
-tags: [成员]
+tags: [成员，深度学习，后端]
 grade: "25"
 avatarUrl: https://avatars.githubusercontent.com/luomu421?size=192
 contacts:
