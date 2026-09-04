@@ -1,0 +1,271 @@
+---
+schemaVersion: 1
+id: validation-and-observability
+title: 怎么知道自己的改动真的能用
+summary: 提交前本地验证、合入前 CI/CD、上线后可观测性，三段式验证管线实践。
+type: track
+status: published
+authors:
+  - tang-mingdi
+tags:
+  - 测试
+  - CI/CD
+  - 可观测性
+publishedAt: 2026-09-04
+updatedAt: 2026-09-04
+cover: null
+media: []
+references:
+  - kind: document
+    title: BlockChain_Dut 贡献指南
+    url: https://github.com/Arisgod1/BlockChain_Dut/blob/main/CONTRIBUTING.md
+    source: GitHub
+---
+
+## 适合谁
+
+- 代码本地能跑，但不确定"别人机器上能跑吗"
+- 部署上线后才发现 bug，但已经晚了
+- 想知道"上线前最少要做哪些事"
+
+## 为什么
+
+写完代码 ≠ 能用。新手最常掉进的坑：
+
+- "我本地跑得好好的" → 别人电脑 / 服务器跑不起来
+- 部署成功后才发现某个页面 404
+- 上线一周后性能越来越慢，但没人发现
+- 删了一篇文档，所有引用它的链接全断
+
+这些不是"写完代码"能解决的，是"写完代码之后"的事。这一节讲**写完代码之后最少要做的三件事**：
+
+1. **本地验证**：在提交前自己先跑一遍
+2. **CI/CD**：让别人机器也跑一遍
+3. **可观测性**：上线后能看到"系统在不在工作"
+
+## 第一件事：本地验证（提交前）
+
+### 阶梯式验证
+
+不要一上来就跑完整测试。从轻到重：
+
+```text
+Level 1  pnpm site-maintainer check  几秒     校验 frontmatter、链接、图片、schema
+Level 2  pnpm typecheck              30 秒    TypeScript 类型检查
+Level 3  pnpm test                   30 秒    单元测试（site-maintainer 自带 vitest）
+Level 4  pnpm test:e2e               几分钟   端到端测试（Playwright，含可访问性）
+Level 5  pnpm build && pnpm preview  几分钟   完整生产构建 + 本地起服务手动看
+```
+
+每一级都是下一级的子集。**上一级失败就不必跑下一级**。
+
+### 提交 PR 前的最小集合
+
+不管改动多小，提交前都跑：
+
+```bash
+git status                                    # 看改了哪些文件
+pnpm site-maintainer check                    # 至少跑格式校验
+git diff main                                 # 一行行看自己改了什么
+```
+
+如果改了"用户能看到的"东西（页面、样式、文案），再补：
+
+```bash
+pnpm test:e2e                                 # 自动端到端
+pnpm build && pnpm preview                    # 手动开浏览器看
+```
+
+### 常见失败原因
+
+| 错误 | 通常原因 | 处理 |
+| --- | --- | --- |
+| 格式校验失败 | 缺字段、命名错 | 按错误信息补 |
+| 引用解析失败 | 链接指向不存在的文件 | 改链接或先创建目标 |
+| 类型检查失败 | TypeScript 报错 | 看具体错误 |
+| E2E 超时 | 网络慢或动画没关 | 重跑一次 |
+
+## 第二件事：CI/CD（合入前）
+
+### CI 是什么
+
+CI = Continuous Integration。每次提交代码，自动跑一遍"完整验证"。
+
+CI 不是"自动部署"，是"自动检查"。**CI 红了就不让合入**。
+
+最低门槛的 CI 至少跑：
+
+```text
+格式校验
+类型检查
+单元测试
+构建测试（确认能构建成功）
+```
+
+进阶的 CI 再加：
+
+```text
+端到端测试
+可访问性测试（axe）
+性能测试（Lighthouse）
+代码风格检查（lint）
+安全扫描（敏感信息）
+```
+
+### 三段式流水线
+
+不要"一次跑全部"，按 PR 类型分流：
+
+```text
+内容 PR  （只改文档、图片）
+  跑：格式校验
+  不跑：构建、E2E、性能
+
+工程 PR  （改代码、配置、CI）
+  跑：上面全部
+
+发布 PR  （合并到 main 后触发生成）
+  跑：全量重建 + 完整验证 + 人工 review
+```
+
+这样能省 CI 时间，让每个 PR 都快速反馈。
+
+### 部署是"手动"的
+
+不管 CI 多自动化，**部署动作本身应该是手动触发**的。
+
+为什么：
+
+- 给维护者一个"最后看一眼"的机会
+- 部署失败时不会"半自动"留下烂摊子
+- 紧急情况可以"暂停部署"
+
+具体到这个项目：合并 PR 后，由维护者手动点 "Deploy Production" workflow 才部署。
+
+### 失败时不要"自动重试"
+
+不要在 CI 里写"重试三次"——这会把"代码 bug"和"环境临时问题"混在一起。
+
+正确做法：
+
+```text
+CI 失败 = 立刻失败，让作者修复
+临时环境问题 = 重新触发 workflow
+代码问题 = 修复后重新触发
+```
+
+让"重试"是显式的人的动作，不是隐式的脚本行为。
+
+## 第三件事：可观测性（上线后）
+
+### 静态网站需要可观测性吗
+
+需要。即使是静态网站，你也要知道：
+
+- 部署成功了吗
+- 页面打开速度变慢了吗
+- 哪个搜索关键词找不到结果
+- 哪个链接被点得最多
+
+### 关键指标
+
+| 指标 | 为什么看 | 阈值 |
+| --- | --- | --- |
+| 部署成功率 | 部署挂了用户看不到页面 | < 100% 立即告警 |
+| 页面加载时间 | 用户体验 | LCP < 2.5 秒 |
+| 资源体积 | 加载慢的根因 | JS < 50KB, CSS < 35KB |
+| 搜索响应 | 找内容快不快 | < 200ms |
+| 404 数量 | 链接是否失效 | 单日 > 阈值告警 |
+
+### 告警要"分通道"
+
+不要"什么告警都发到同一个群"。按优先级分流：
+
+```text
+P0  部署失败 / 站点挂    → 维护者全员飞书
+P1  性能退化 / 链接失效  → 工程维护者
+P2  资源超阈值 / 搜索慢  → 邮件周报
+P3  趋势数据             → 季度 review
+```
+
+### 不要监控"无用指标"
+
+新手容易监控"看起来专业但没人看"的指标：
+
+```text
+×  CPU 使用率（静态网站没意义）
+×  内存使用率（同上）
+×  错误率（如果用户看不到错误页面，错误率没意义）
+×  PV / UV（除非你专门想做流量分析）
+```
+
+优先监控"**用户能感受到的**"指标：页面能不能打开、打开快不快、能不能找到内容。
+
+## 反模式
+
+```text
+// 反例 1：本地跑通就提交
+"我本地能跑，CI 应该也能跑"  → 跑 CI 看才能确认
+
+// 反例 2：CI 红了还能合
+"CI 失败但我知道没事"  → 严格禁止
+
+// 反例 3：自动部署
+"CI 过了就自动部署"  → 留人工 review 窗口
+
+// 反例 4：监控所有指标
+"CPU 内存网络全都监控"  → 监控用户能感受到的
+
+// 反例 5：告警不处理
+"告警一直发但没人看"  → 告警必须有 owner
+```
+
+## 速查清单
+
+### 提交 PR 前
+
+```text
+□ 改了哪些文件？git diff 看了吗？
+□ pnpm site-maintainer check 跑了吗？
+□ 改了用户能看到的，跑 pnpm test:e2e 了吗？
+□ 重要改动跑了 pnpm build && pnpm preview 手动看吗？
+```
+
+### 合并 PR 前
+
+```text
+□ CI 是绿的吗？
+□ 有 reviewer 批准吗？
+□ 验收清单勾完了吗？
+```
+
+### 部署前
+
+```text
+□ 部署 workflow 手动触发了吗？
+□ 部署后打开网站看主要页面了吗？
+□ 搜索一个关键词能返回结果吗？
+□ 关键链接没有 404 吗？
+```
+
+## 在本知识库的体现
+
+本项目用 GitHub Actions 跑 CI/CD，监控主要靠 Lighthouse + 更新报告。仓库里只有两个 workflow：
+
+- `validate.yml`：所有 PR 必跑，调用 `pnpm site-maintainer ci-policy` 判断 PR 类型
+  - 内容 PR（只动 `knowledge/`、图片）：只跑 `pnpm site-maintainer check`
+  - 工程 PR（动 `site/`、`packages/`、CI 配置）：在 check 之上加 `pnpm typecheck` + `pnpm test` + `pnpm test:e2e`
+  - `release/*` 分支：额外跑 `pnpm site-maintainer rebuild --all` + diff 校验，确保生成层可重现
+- `deploy-pages.yml`（"Deploy Production"）：手动 `workflow_dispatch` 触发，把指定 commit 部署到 GitHub Pages；失败不会替换线上
+- `generated/update-report.md` 记录每次发布的构建指标
+
+可以参考 `.github/workflows/` 实际看流水线。
+
+## 进一步阅读
+
+- 上一篇：[把系统搭得能扩展](/tracks/system-architecture-basics/) — 系统的组织
+- 本项目文档：[贡献指南](https://github.com/Arisgod1/BlockChain_Dut/blob/main/CONTRIBUTING.md) — 完整发布流程
+
+## 作者
+
+- [唐明迪](/members/tang-mingdi/)
