@@ -50,11 +50,11 @@ references:
 不要一上来就跑完整测试。从轻到重：
 
 ```text
-Level 1  pnpm check              几秒     校验格式、引用、命名
-Level 2  pnpm validate           30 秒    类型检查 + 单元测试
-Level 3  pnpm test:e2e           几分钟   端到端测试（自动模拟用户操作）
-Level 4  pnpm build              1 分钟   完整生产构建
-Level 5  pnpm preview            几分钟   本地起服务器 + 手动看
+Level 1  pnpm site-maintainer check  几秒     校验 frontmatter、链接、图片、schema
+Level 2  pnpm typecheck              30 秒    TypeScript 类型检查
+Level 3  pnpm test                   30 秒    单元测试（site-maintainer 自带 vitest）
+Level 4  pnpm test:e2e               几分钟   端到端测试（Playwright，含可访问性）
+Level 5  pnpm build && pnpm preview  几分钟   完整生产构建 + 本地起服务手动看
 ```
 
 每一级都是下一级的子集。**上一级失败就不必跑下一级**。
@@ -65,7 +65,7 @@ Level 5  pnpm preview            几分钟   本地起服务器 + 手动看
 
 ```bash
 git status                                    # 看改了哪些文件
-pnpm check                                    # 至少跑格式校验
+pnpm site-maintainer check                    # 至少跑格式校验
 git diff main                                 # 一行行看自己改了什么
 ```
 
@@ -226,7 +226,7 @@ P3  趋势数据             → 季度 review
 
 ```text
 □ 改了哪些文件？git diff 看了吗？
-□ pnpm check 跑了吗？
+□ pnpm site-maintainer check 跑了吗？
 □ 改了用户能看到的，跑 pnpm test:e2e 了吗？
 □ 重要改动跑了 pnpm build && pnpm preview 手动看吗？
 ```
@@ -250,11 +250,13 @@ P3  趋势数据             → 季度 review
 
 ## 在本知识库的体现
 
-本项目用 GitHub Actions 跑 CI/CD，监控主要靠 Lighthouse + 更新报告：
+本项目用 GitHub Actions 跑 CI/CD，监控主要靠 Lighthouse + 更新报告。仓库里只有两个 workflow：
 
-- `ci.yml` 区分内容 PR 和工程 PR 的 job 集合
-- `release.yml` 跑全量重建 + 完整校验
-- `deploy-production.yml` 是手动触发，部署失败不替换线上
+- `validate.yml`：所有 PR 必跑，调用 `pnpm site-maintainer ci-policy` 判断 PR 类型
+  - 内容 PR（只动 `knowledge/`、图片）：只跑 `pnpm site-maintainer check`
+  - 工程 PR（动 `site/`、`packages/`、CI 配置）：在 check 之上加 `pnpm typecheck` + `pnpm test` + `pnpm test:e2e`
+  - `release/*` 分支：额外跑 `pnpm site-maintainer rebuild --all` + diff 校验，确保生成层可重现
+- `deploy-pages.yml`（"Deploy Production"）：手动 `workflow_dispatch` 触发，把指定 commit 部署到 GitHub Pages；失败不会替换线上
 - `generated/update-report.md` 记录每次发布的构建指标
 
 可以参考 `.github/workflows/` 实际看流水线。
