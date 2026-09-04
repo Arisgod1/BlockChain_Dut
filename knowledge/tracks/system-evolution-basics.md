@@ -11,7 +11,6 @@ tags:
   - 演进
   - 兼容性
   - Schema
-  - 架构
 publishedAt: 2026-09-04
 updatedAt: 2026-09-04
 cover: null

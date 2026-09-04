@@ -10,8 +10,6 @@ authors:
 tags:
   - 文档
   - 知识管理
-  - 入门
-  - Markdown
 publishedAt: 2026-09-04
 updatedAt: 2026-09-04
 cover: null
