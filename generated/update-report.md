@@ -1,10 +1,10 @@
 # Site update report
 
-Source commit: `d3103de120b1a11939ec532379c4f9cbcc9c359b`
+Source commit: `2923edc4e944cd8ea62e60e84e456fd3eb0a62de`
 Generator: `1.0.0`
 
-- Added: game-genre-taxonomy
-- Changed: none
+- Added: code-engineering-basics, engineering-doc-knowledge, system-architecture-basics, system-evolution-basics, team-collaboration-basics, validation-and-observability
+- Changed: blockchain-dut-knowledge-base
 - Deleted: none
 
 Run `pnpm site-maintainer preview` and inspect all affected routes before publishing.
