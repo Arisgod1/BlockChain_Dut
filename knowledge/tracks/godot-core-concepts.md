@@ -4,7 +4,7 @@ id: godot-core-concepts
 title: Godot 开发核心概念速览：节点、场景、脚本、信号与常见术语释疑
 summary: 面向初入手 Godot 的开发者的核心概念讲解，解释节点与场景树、场景实例化、脚本绑定、信号、Autoload、状态机、压力测试与性能调优等常见术语，并给出官方文档入口。
 type: track
-status: draft
+status: published
 authors:
   - wang-yida
 tags:
